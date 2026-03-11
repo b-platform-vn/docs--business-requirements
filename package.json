@@ -1,0 +1,15 @@
+{
+  "name": "bplatform-documents",
+  "version": "1.0.0",
+  "description": "Requirements Document",
+  "main": "index.js",
+  "scripts": {
+    "start": "docsify serve ."
+  },
+  "devDependencies": {
+    "docsify-cli": "^4.4.4"
+  },
+  "dependencies": {
+    "docsify": "^4.13.1"
+  }
+}
