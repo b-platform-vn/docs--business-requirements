@@ -23,7 +23,6 @@
 
 | Hàm | File | Loại thay đổi |
 |-----|------|---------------|
-|----------|------|-------------|
 | `OmniService.upsertForwardingRecord()` | `src/app/omni/omni.service.ts` | **Sửa** — thay `this.getRetryIntervalMs()` bằng `this.getBackoffMs(nextAttemptCount)` trên dòng `nextRetryAt` |
 | `OmniService.getBackoffMs()` | `src/app/omni/omni.service.ts` | **Thêm** — helper private mới; trả về ms từ lịch cố định `[1000, 5000, 15000, 30000]` |
 | `OmniService.getRetryIntervalMs()` | `src/app/omni/omni.service.ts` | **Không đổi code** — chỉ giá trị env thay đổi |
