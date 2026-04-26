@@ -11,6 +11,7 @@
     - [UC-001: Kết nối Zalo OA](mcm/uc-001-zalo-connect.md)
     - [UC-007: Đồng bộ thời gian thực SSE + Change Streams](mcm/uc-007-realtime-sync-sse-changestreams.md)
     - [UC-009: Tenant = Khối (MaKhoi)](mcm/uc-009-tenant-division.md)
+    - [UC-010: Refactor Web — Server Actions + SSE Proxy](mcm/uc-010-web-server-actions-refactor.md)
     - [Feature-002: Tự động làm mới Access Token](mcm/feature-002-auto-refresh-token.md)
     - [Feature-003: Nhận tin nhắn từ Zalo](mcm/feature-003-receive-message-from-zalo.md)
     - [Feature-004: Gửi tin nhắn đến Zalo](mcm/feature-004-send-message-to-zalo.md)

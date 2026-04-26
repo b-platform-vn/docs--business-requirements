@@ -5,6 +5,10 @@
 - [UC-001: Kết nối Zalo OA](/mcm/uc-001-zalo-connect.md)
 - [UC-007: Đồng bộ thời gian thực qua MongoDB Change Streams + SSE](/mcm/uc-007-realtime-sync-sse-changestreams.md)
 - [UC-009: Tenant = Khối (MaKhoi)](/mcm/uc-009-tenant-division.md)
+- [UC-010: Refactor Web — Server Actions + SSE Route Handler Proxy](/mcm/uc-010-web-server-actions-refactor.md)
+  - [IP-010: Implementation Plan](/mcm/ip-010-web-server-actions-refactor.md)
+  - [TP-010: Test Plan](/mcm/tp-010-web-server-actions-refactor.md)
+  - [DP-010: Deployment Plan](/mcm/dp-010-web-server-actions-refactor.md)
 
 ## Tính năng
 
