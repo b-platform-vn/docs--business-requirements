@@ -64,7 +64,7 @@ Khi nhân viên reply một tin (có quote) trong Web MCM Messenger, tin đượ
 
 > `quote_message_id` must be the **Zalo-native msg_id** (`acb08fadd7af31f668b9`), not the internal UUID.
 
-## Actual Output (Broken)
+## Đầu ra thực tế (Lỗi)
 
 ```json
 {
