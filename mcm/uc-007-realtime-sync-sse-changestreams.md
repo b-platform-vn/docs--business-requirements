@@ -8,14 +8,14 @@
 
 | # | Câu hỏi | Quyết định |
 |---|---------|----------|
-| 1 | Browser `EventSource` cannot send custom headers | Use `@microsoft/fetch-event-source` polyfill in the Web Worker. Token stays in `Authorization` header — never in the URL. |
-| 2 | MongoDB Atlas tier requirement | Change Streams require M10+ replica set. **MCM Developer must confirm Atlas tier before starting implementation.** If tier is below M10, fall back to Phase 1 (5s poll + seq cursor fix) first. |
-| 3 | `seq` counter scope | **One counter per tenant** shared across all collections. Single cursor value for the client — simpler reconnect logic. |
-| 4 | Where is `seq` assigned | **Before write** (Option A): assign `seq` from `counters` → write `seq` field into the document → Change Stream carries it naturally. `seq` is stored persistently in `messages` and `conversations` documents. |
-| 5 | `customers` / `users` via SSE | **No** — keep these two collections on the 60s periodic poll only. SSE covers `messages` and `conversations` only. |
-| 6 | Which thread owns `EventSource` | **Web Worker** — all sync logic stays in one place. `@microsoft/fetch-event-source` works in Worker context. |
-| 7 | Token expiry on long-lived SSE | On 401 from SSE stream → close connection → wait for `UPDATE_TOKEN` worker message (sent by existing `token-refresh.service.ts`) → reopen SSE with fresh token. |
-| 8 | Phase 1 vs Phase 2 | **Skip Phase 1** — go straight to Change Streams + SSE (Phase 2). |
+| 1 | Browser `EventSource` không thể gửi header tùy chỉnh | Dùng polyfill `@microsoft/fetch-event-source` trong Web Worker. Token đặt trong header `Authorization` — không bao giờ đưa vào URL. |
+| 2 | Yêu cầu tier MongoDB Atlas | Change Streams yêu cầu replica set M10+. **MCM Developer phải xác nhận tier Atlas trước khi bắt đầu triển khai.** Nếu tier thấp hơn M10, chuyển sang Phase 1 (poll 5s + sửa seq cursor) trước. |
+| 3 | Phạm vi counter `seq` | **Một counter mỗi tenant**, dùng chung cho tất cả các collection. Một giá trị cursor duy nhất cho client — logic reconnect đơn giản hơn. |
+| 4 | `seq` được gán ở đâu | **Trước khi ghi** (Phương án A): lấy `seq` từ collection `counters` → ghi trường `seq` vào document → Change Stream tự nhiên mang theo. `seq` được lưu trữ vĩnh viễn trong document `messages` và `conversations`. |
+| 5 | `customers` / `users` qua SSE | **Không** — giữ nguyên hai collection này với poll định kỳ 60s. SSE chỉ áp dụng cho `messages` và `conversations`. |
+| 6 | Thread nào sở hữu `EventSource` | **Web Worker** — toàn bộ logic sync tập trung một chỗ. `@microsoft/fetch-event-source` hoạt động trong ngữ cảnh Worker. |
+| 7 | Token hết hạn khi SSE tồn tại lâu | Khi nhận 401 từ SSE stream → đóng kết nối → chờ message `UPDATE_TOKEN` từ worker (gửi bởi `token-refresh.service.ts` hiện có) → mở lại SSE với token mới. |
+| 8 | Phase 1 hay Phase 2 | **Bỏ qua Phase 1** — đi thẳng sang Change Streams + SSE (Phase 2). |
 
 ---
 
@@ -35,21 +35,21 @@
 ## Kiến trúc hiện tại (Vấn đề)
 
 ```
-POST /api/internal/messages  (called by omni-channel)
+POST /api/internal/messages  (được gọi bởi omni-channel)
   └─► SyncService.receiveMessage()
-        └─► this.emitChange("messages", data)      ← Node.js EventEmitter (in-process only)
+        └─► this.emitChange("messages", data)      ← Node.js EventEmitter (chỉ trong process)
               │
               └─► pullEvents() long-poll promise
-                    resolves immediately if a waiter exists on THIS pod
-                    OR waits 30 seconds and returns []
+                    giải quyết ngay nếu có waiter trên POD NÀY
+                    HOẶC chờ 30 giây rồi trả về []
 
 GET /api/internal/sync/pull/events?since=<timestamp>
   └─► SyncService.pullEvents(siteId, since)
-        if (docs exist since timestamp) → return immediately
-        else → hold connection 30s, resolve on emitChange() or timeout
+        if (tồn tại doc từ timestamp) → trả về ngay
+        else → giữ kết nối 30s, giải quyết khi emitChange() hoặc timeout
 
 Web MCM Messenger (sync-worker)
-  └─► setInterval(() => pullEvents(), 60_000)    ← 60s periodic
+  └─► setInterval(() => pullEvents(), 60_000)    ← định kỳ 60s
         └─► GET /sync/pull/events?since=<lastPullTimestamp>
 ```
 
@@ -64,29 +64,29 @@ Web MCM Messenger (sync-worker)
 ## Kiến trúc mới
 
 ```
-POST /api/internal/messages  (called by omni-channel)
+POST /api/internal/messages  (được gọi bởi omni-channel)
   └─► SyncService.receiveMessage()
         └─► MongoDB write (messages / conversations / customers / users)
               │
               ▼
-        MongoDB Atlas Change Stream (oplog-based, cluster-wide)
+        MongoDB Atlas Change Stream (dựa trên oplog, toàn cluster)
               │
-              ▼  All pods receive the change event
+              ▼  Tất cả pod nhận sự kiện thay đổi
         SyncService change stream cursor
               │
-              └─► broadcast to all SSE clients of THIS pod for the matching tenant
+              └─► phát tới tất cả SSE client của POD NÀY thuộc tenant tương ứng
 
-GET /api/internal/sync/sse   (replaces /sync/pull/events)
+GET /api/internal/sync/sse   (thay thế /sync/pull/events)
   └─► SyncController.streamEvents()
-        └─► Returns EventStream (text/event-stream)
-              Client sends: Authorization + X-Tenant-Id
-              Server pushes: { operation, collection, data, seq } on every change
-              Heartbeat: ":\n\n" every 15s to keep nginx from closing the connection
+        └─► Trả về EventStream (text/event-stream)
+              Client gửi: Authorization + X-Tenant-Id
+              Server đẩy: { operation, collection, data, seq } mỗi khi có thay đổi
+              Heartbeat: ":\n\n" mỗi 15s để nginx không đóng kết nối
 
-Web MCM Messenger (sync-worker) — new
+Web MCM Messenger (sync-worker) — mới
   └─► new EventSource('/api/internal/sync/sse', { headers })
-        onmessage → apply upsert/delete to Dexie → Dexie live query re-renders React
-  └─► setInterval(() => pullEvents(), 60_000)    ← kept as reconnect/catchup fallback only
+        onmessage → áp dụng upsert/delete vào Dexie → Dexie live query render lại React
+  └─► setInterval(() => pullEvents(), 60_000)    ← giữ lại chỉ như fallback reconnect/bắt kịp
 ```
 
 ---
@@ -128,7 +128,7 @@ data: {"operation":"upsert","collection":"conversations","data":{...},"seq":1043
 
 ### Unit Tests (`sync.service.spec.ts`)
 
-| Test | Phương pháp |
+| Trường hợp kiểm thử | Phương pháp |
 |------|-------------|
 | Change stream gửi sự kiện đến SSE subscriber | Mock MongoDB cursor; xác nhận `broadcastToSseTenantClients()` được gọi đúng payload |
 | `pullEvents(siteId, since: number)` chỉ trả document có `seq > since` | Mock repo; kiểm tra filter dùng `seq` không dùng `updatedAt` |
