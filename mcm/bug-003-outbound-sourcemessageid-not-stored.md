@@ -32,18 +32,18 @@ Hậu quả: khi user Zalo reply tin outbound đó, reply inbound đến với `
 ### Vòng đời ID của tin Outbound
 
 ```
-Web (push)                         Connector-Internal            Omni-Channel           Connector-Zalo        Zalo API
+Web (đẩy)                          Connector-Internal            Omni-Channel           Connector-Zalo        Zalo API
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 POST /sync/push
-  messageId = "m-out-..."           ─── stored, sourceMessageId = null ─────────────────────────────────────────────▶
+  messageId = "m-out-..."           ─── đã lưu, sourceMessageId = null ──────────────────────────────────────────────▶
                                      normalizeInternalMessage()
                                      omniMessage.sourceMessageId = "m-out-..."
                                      ───────────────────────────────────────────────────────────────────────────────▶
-                                                                   Zalo API returns msg_id = "9394f177..."
+                                                                   Zalo API trả về msg_id = "9394f177..."
                                                                    ◀── channelMessageId = "9394f177..."
                                      ◀── forwardResult.response ──────────────────────────────────────────────────
-                                     forwardResult IS available ✓
-                                     BUT channelMessageId is NEVER written back to messages.sourceMessageId  ← BUG
+                                     forwardResult CÓ SẴN ✓
+                                     NHƯNG channelMessageId KHÔNG BAO GIỜ được ghi trở lại vào messages.sourceMessageId  ← LỖI
 ```
 
 ### Xảy ra gì khi nhận Reply Inbound
@@ -54,9 +54,9 @@ Zalo webhook: quote_msg_id = "9394f177a672402b1964"
   → connector-internal: receiveMessage()
        resolveSourceMessageId("9394f177a672402b1964")
          → messageRepo.findOne({ where: { sourceMessageId: "9394f177a672402b1964" } })
-         → NONE FOUND  (outbound record has sourceMessageId = null)
-         → fallback: returns "9394f177a672402b1964" unchanged
-       internalMessage.replyToMessageId       = "9394f177a672402b1964"  ← Zalo msg_id leaked through
+         → KHÔNG TÌM THẤY  (bản ghi outbound có sourceMessageId = null)
+         → dự phòng: trả về "9394f177a672402b1964" không thay đổi
+       internalMessage.replyToMessageId       = "9394f177a672402b1964"  ← Zalo msg_id bị rò rỉ ra ngoài
        internalMessage.replyToMessagePreview  = undefined
        internalMessage.replyToMessageSenderName = undefined
 ```
