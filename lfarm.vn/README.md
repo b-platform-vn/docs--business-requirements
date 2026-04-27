@@ -21,6 +21,6 @@
 
 ## Tài liệu liên quan
 
-- [use-cases.md](use-cases.md) — Danh sách tất cả use case / feature
-- [uc-001-feature-analysis.md](uc-001-feature-analysis.md) — Phân tích tính năng theo từng trang
-- [uc-002-migration-plan.md](uc-002-migration-plan.md) — Kế hoạch chuyển đổi sang NestJS/NextJS
+- [use-cases.md](./use-cases.md) — Danh sách tất cả use case / feature
+- [uc-001-feature-analysis.md](./uc-001-feature-analysis.md) — Phân tích tính năng theo từng trang
+- [uc-002-migration-plan.md](./uc-002-migration-plan.md) — Kế hoạch chuyển đổi sang NestJS/NextJS

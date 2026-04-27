@@ -21,3 +21,8 @@
     - [Bug-001: Reply Inbound Quote Hiển Thị "..."](mcm/bug-001-inbound-reply-broken-quote.md)
     - [Bug-002: Reply Outbound Thiếu Quote Zalo](mcm/bug-002-outbound-reply-missing-zalo-quote.md)
     - [Bug-003: sourceMessageId Outbound Không Lưu](mcm/bug-003-outbound-sourcemessageid-not-stored.md)
+- L'Farm (lfarm.vn)
+  - [Tổng quan](lfarm.vn/README.md)
+  - [Tính năng & Use Cases](lfarm.vn/use-cases.md)
+    - [UC-001: Phân tích tính năng theo từng trang](lfarm.vn/uc-001-feature-analysis.md)
+    - [UC-002: Kế hoạch chuyển đổi NestJS / NextJS](lfarm.vn/uc-002-migration-plan.md)
