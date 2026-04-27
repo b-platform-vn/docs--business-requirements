@@ -33,3 +33,4 @@
 - [Bug-002: Reply Outbound — Quote không hiển thị trong Zalo](/mcm/bug-002-outbound-reply-missing-zalo-quote.md)
 - [Bug-003: `sourceMessageId` của tin outbound không được lưu sau khi Zalo giao tin](/mcm/bug-003-outbound-sourcemessageid-not-stored.md)
 - [Bug-004: PRD MongoDB chạy standalone làm hỏng Change Stream của Connector/Internal](/mcm/bug-004-prd-mongodb-standalone-breaks-changestream.md)
+- [Bug-005: Connector/Internal dùng MongoDB DNS cũ sau khi migrate sang replica set](/mcm/bug-005-prd-connector-internal-mongodb-dns-mismatch.md)
