@@ -8,6 +8,10 @@ Danh sách các usecase và yêu cầu chức năng.
 - [UC-002: Đăng nhập](/mdfoods.vn/uc-002-login-b2b.md)
 - [UC-003: Quản lý thành viên công ty](/mdfoods.vn/uc-003-manage-members-b2b.md)
 
-## 2. Quản trị viên
+## 2. Tính năng Hệ thống
+
+- [FEATURE-004: Hỗ trợ Đa Ngôn Ngữ (EN/VI)](/mdfoods.vn/feature-004-i18n-en-vi.md)
+
+## 3. Quản trị viên
 
 - [UC-00X: Xác thực thông tin doanh nghiệp (TBD)]
