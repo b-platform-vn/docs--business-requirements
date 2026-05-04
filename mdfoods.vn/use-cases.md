@@ -12,6 +12,10 @@ Danh sách các usecase và yêu cầu chức năng.
 
 - [FEATURE-004: Hỗ trợ Đa Ngôn Ngữ (EN/VI)](/mdfoods.vn/feature-004-i18n-en-vi.md)
 
+## 3. Báo Cáo Lỗi
+
+- [BUG-005: Trang Chi Tiết Sản Phẩm Hiển Thị Thiếu Hình Ảnh và Thông Tin Thuộc Tính](/mdfoods.vn/bug-005-product-detail-missing-images-and-attributes.md)
+
 ## 3. Quản trị viên
 
 - [UC-00X: Xác thực thông tin doanh nghiệp (TBD)]
