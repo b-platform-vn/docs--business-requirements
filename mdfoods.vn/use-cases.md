@@ -11,6 +11,7 @@ Danh sách các usecase và yêu cầu chức năng.
 ## 2. Tính năng Hệ thống
 
 - [FEATURE-004: Hỗ trợ Đa Ngôn Ngữ (EN/VI)](/mdfoods.vn/feature-004-i18n-en-vi.md)
+- [FEATURE-006: Cập Nhật Trường Ảnh Sản Phẩm — Sử Dụng Ảnh Gốc (TenFile) Thay Cho Ảnh Thu Nhỏ (TenFileThumb)](/mdfoods.vn/feature-006-update-product-image-to-full-size.md)
 
 ## 3. Báo cáo lỗi
 
