@@ -17,6 +17,7 @@ Danh sách các usecase và yêu cầu chức năng.
 
 - [BUG-005: Trang Chi Tiết Sản Phẩm Hiển Thị Thiếu Hình Ảnh và Thông Tin Thuộc Tính](/mdfoods.vn/bug-005-product-detail-missing-images-and-attributes.md)
 - [BUG-005: Bộ lọc checkbox chỉ cho phép chọn 1 điều kiện](/mdfoods.vn/bug-005-filter-checkbox-multi-select.md)
+- [BUG-007: Hiển Thị Hình Ảnh Sản Phẩm — Ảnh Đại Diện Bị Bể và Thiếu Hình Nhỏ Bên Dưới Hình Chính](/mdfoods.vn/bug-007-product-images-display-issues.md)
 
 ## 4. Quản trị viên
 
