@@ -14,6 +14,7 @@ Danh sách các usecase và yêu cầu chức năng.
 - [FEATURE-006: Cập Nhật Trường Ảnh Sản Phẩm — Sử Dụng Ảnh Gốc (TenFile) Thay Cho Ảnh Thu Nhỏ (TenFileThumb)](/mdfoods.vn/feature-006-update-product-image-to-full-size.md)
 - [FEATURE-008: Cải Tiến Giao Diện Chuyển Đổi Ngôn Ngữ (VI | EN với Highlight)](/mdfoods.vn/feature-008-language-switcher-ui.md)
 - [FEATURE-009: Tạo Lại Đường Dẫn Sản Phẩm và Danh Mục Theo Tên (Slug-based URL)](/mdfoods.vn/feature-009-slug-based-product-category-url.md)
+- [FEATURE-010: Điều chỉnh Một Số Tiểu Tiết Trình Bày Layout](/mdfoods.vn/feature-010-layout-adjustments.md)
 
 ## 3. Báo cáo lỗi
 
