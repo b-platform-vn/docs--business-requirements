@@ -15,6 +15,7 @@ Danh sách các usecase và yêu cầu chức năng.
 - [FEATURE-008: Cải Tiến Giao Diện Chuyển Đổi Ngôn Ngữ (VI | EN với Highlight)](/mdfoods.vn/feature-008-language-switcher-ui.md)
 - [FEATURE-009: Tạo Lại Đường Dẫn Sản Phẩm và Danh Mục Theo Tên (Slug-based URL)](/mdfoods.vn/feature-009-slug-based-product-category-url.md)
 - [FEATURE-010: Trang "Khách hàng Thân thiết" (Loyalty Page)](/mdfoods.vn/feature-010-loyalty-page.md)
+- [FEATURE-011: Đồng bộ hóa Layout cho các Trang Thông tin (Liên hệ, Con người MDFoods, Hỏi & Đáp, Chính sách Giao hàng)](/mdfoods.vn/feature-011-update-layout-for-informational-pages.md)
 
 ## 3. Báo cáo lỗi
 
