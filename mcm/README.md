@@ -32,22 +32,18 @@ MCM đang chuyển từ mô hình **REST-only** (các service gọi HTTP trực 
 │  (webhook,   │   │  divisions)  │  │  (sync API,    │  │  whatsapp    │
 │   OAuth)     │◄──┤              │  │   SSE fan-out) │  │  (future)    │
 └──────┬───────┘   └──────┬───────┘  └────┬───────────┘  └──────┬───────┘
-       │                  │               │  ▲                  │
-       │        validate  │               │  │                  │
-       │        (REST)    │               │  │                  │
-       │                  ▼               │  │                  │
-       │           ┌──────────────┐       │  │                  │
-       │           │  MSSQL       │       │  │                  │
-       │           │  (users,     │       │  │                  │
-       │           │   sites,     │       │  │                  │
-       │           │   khoi)      │       │  │                  │
-       │           └──────────────┘       │  │                  │
-       │                                  │  │                  │
-       │        ┌─────────────────────────┘  │                  │
-       │        │                            │                  │
-       │        │     ┌──────────────────────┘                  │
-       │        │     │                                         │
-       ▼        ▼     ▼                                         ▼
+       │                  │               │                     │
+       │        validate  │               │                     │
+       │        (REST)    │               │                     │
+       │                  ▼               │                     │
+       │           ┌──────────────┐       │                     │
+       │           │  MSSQL       │       │                     │
+       │           │  (users,     │       │                     │
+       │           │   sites,     │       │                     │
+       │           │   khoi)      │       │                     │
+       │           └──────────────┘       │                     │
+       │                                  │                     │
+       ▼                                  ▼                     ▼
 ╔═══════════════════════════════════════════════════════════════════════╗
 ║                                                                       ║
 ║             REDIS STREAMS  (event bus, at-least-once)                 ║
@@ -89,9 +85,7 @@ MCM đang chuyển từ mô hình **REST-only** (các service gọi HTTP trực 
                     │            │  MongoDB     │         │
                     │            │  Atlas       │         │
                     │            │  (routing    │         │
-                    │            │   rules,     │         │
-                    │            │   forwarding │         │
-                    │            │   records)   │         │
+                    │            │   rules)     │         │
                     │            └──────────────┘         │
                     │                                     │
                     │                                     │
