@@ -1,0 +1,12 @@
+{
+  "name": "platform-ecosystem-docs",
+  "version": "1.0.0",
+  "description": "Platform Ecosystem Documentation powered by Docsify",
+  "scripts": {
+    "start": "docsify serve .",
+    "dev": "docsify serve . --port 3000"
+  },
+  "devDependencies": {
+    "docsify-cli": "^4.4.4"
+  }
+}
