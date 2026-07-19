@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Author** | _TBD_ |
+| **Author** | annguyen1 |
 | **Updated** | 2026.07.18 |
 | **Product** | [MDFoods](/products/mdfoods/README.md) |
 | **Priority** | P0 |

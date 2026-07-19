@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Author** | _TBD_ |
+| **Author** | tvlong |
 | **Updated** | 2026.07.17 |
 | **Product** | [MDFoods](/products/mdfoods/README.md) |
 | **Priority** | P1 |
