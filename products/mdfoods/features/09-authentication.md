@@ -59,21 +59,21 @@ An **Authentication** system providing secure credential verification, Business 
 - [P0] User can submit valid Email/Phone and Password.
 - [P0] If credential verification succeeds, system continues to Business Unit resolution.
 - [P0] System creates a JWT-based session after successful authentication and Business Unit resolution.
-- [P0] System preserves the previous page before login and redirects back after successful authentication.
+- [P0] System redirects the user after successful authentication according to **9.4 User authenticates from any page**.
 - [P0] User can securely logout; logout invalidates the active session.
 - [P1] User can select "Remember me" during login.
 
 #### 9.2.1 User belongs to single BU (Business Unit)
 
 - [P0] If user belongs to a single Business Unit, system automatically selects that Business Unit.
-- [P0] System redirects user to the previous page before login after selecting the Business Unit automatically.
+- [P0] System redirects the user after selecting the Business Unit automatically according to **9.4 User authenticates from any page**.
 - [P0] The active session stores the selected Business Unit context.
 
 #### 9.2.2 User belongs to multiple BUs
 
 - [P0] If user belongs to multiple Business Units, system shows a Company / Business Unit selection step.
 - [P0] User can choose which Company / Business Unit they would like to work on.
-- [P0] After selection, system redirects user to the previous page before login.
+- [P0] After selection, system redirects the user according to **9.4 User authenticates from any page**.
 - [P0] The active session stores the selected Business Unit context.
 
 ### 9.3 User enable 2FA (2 factor-authentication)
@@ -90,12 +90,26 @@ An **Authentication** system providing secure credential verification, Business 
 - [P2] OTP codes expire after a short period. _(Next version)_
 - [P2] System applies resend limits for OTP emails. _(Next version)_
 
+### 9.4 User authenticates from any page
+
+- [P0] If authentication is opened from the Home Page, redirect the user back to the Home Page after successful authentication and Business Unit resolution.
+- [P0] If authentication is opened via a referral link, redirect the user to the Home Page after successful authentication and Business Unit resolution.
+- [P0] If authentication is opened from any other page, preserve the originating page URL and redirect the user back to that originating page after successful authentication and Business Unit resolution.
+- [P0] If the originating page URL is unavailable or invalid, fall back to the Home Page after successful authentication and Business Unit resolution.
+- [P0] If authentication is triggered from the Cart page while the user is creating a quote request, recover the temporarily stored quote-request information and continue the **Request a Quote** process directly after successful authentication; do not redirect the user back to the Cart page.
+- [P0] If the user has items in the cart before authentication and does not have cart items from a previous authenticated session, preserve all cart items after successful authentication.
+- [P0] If the user has items in the cart before authentication and also has cart items from a previous authenticated session, show a cart-resolution prompt after successful authentication.
+	- [P0] If the user chooses **Overwrite with new Cart**, replace the previous authenticated-session cart with the current local cart.
+	- [P0] If the user chooses **Use old cart only**, discard the current local cart and restore the previous authenticated-session cart.
+	- [P0] If the user chooses **Merge both cart items**, combine the current local cart and previous authenticated-session cart into one cart.
+- [P0] If the user has items in the cart after authentication and then logs out, clear the cart from local state because the cart now belongs to the previous authenticated user.
+
 ## Appendix
 
 ### Business Unit Selection
 
-- **Single Business Unit** — The system automatically selects the user's only Business Unit and redirects to the previous page before login.
-- **Multiple Business Units** — The system shows a Company / Business Unit selection step. After selection, the user is redirected to the previous page before login.
+- **Single Business Unit** — The system automatically selects the user's only Business Unit and redirects according to **9.4 User authenticates from any page**.
+- **Multiple Business Units** — The system shows a Company / Business Unit selection step. After selection, the user is redirected according to **9.4 User authenticates from any page**.
 
 ### Lockout Rule
 
