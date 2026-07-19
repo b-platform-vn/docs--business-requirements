@@ -62,3 +62,40 @@ Keep polling the same `fileKey` and `captureId` every few seconds until complete
 ### Result quality
 
 Figma capture imports raw frames and text, not linked design-system components. Treat the result as a pixel-perfect reference. If a componentized design is needed, rebuild the screen afterward with `use_figma` and design-system components.
+
+## Multica Feature Description Workflow
+
+Use these instructions whenever synchronizing Product Feature Requirement Documents (FRDs) into Multica Feature issues.
+
+### Keep descriptions short and useful
+
+Do **not** paste the full FRD into the Multica issue description. Multica is for task allocation and progress tracking; the full source of truth stays in Git.
+
+Use this concise structure:
+
+```md
+## Scope
+
+v2 scope: new implementation.
+
+An **<Feature Name>** feature that <one-sentence outcome / integration summary>.
+
+## References
+
+- Feature Requirement Document: <GitHub URL to the FRD>
+- Figma Design: <Figma URL or TBD>
+
+## Notes
+
+- Source: current `products/<product>` specs.
+- Feature priority: <P0/P1/P2>
+```
+
+### Description rules
+
+- Keep the description under ~600 characters when practical.
+- Include only scope, links, and priority.
+- Link to the FRD instead of duplicating requirements.
+- Include Figma link when the FRD has one; otherwise use `TBD`.
+- Mention integration context only when it changes implementation direction.
+- Keep issue labels, project, status, and assignee in Multica fields — not repeated in the description.
