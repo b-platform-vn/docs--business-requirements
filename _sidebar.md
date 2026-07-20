@@ -27,6 +27,6 @@
       - [17. Order & Payment](products/mdfoods/features/17-order-and-payment.md)
       - [18. Orders Management](products/mdfoods/features/18-orders-management.md)
       - [19. Messages & Notifications](products/mdfoods/features/19-in-app-messages-notification.md)
-        - [20. Password Recovery](products/mdfoods/features/20-password-recovery.md)
+      - [20. Password Recovery](products/mdfoods/features/20-password-recovery.md)
   - [Odeli](products/odeli/README.md)
   - [LFarm](products/lfarm/README.md)
