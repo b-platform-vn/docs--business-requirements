@@ -6,6 +6,7 @@
 | **Updated** | 2026.07.19 |
 | **Product** | [MDFoods](/products/mdfoods/README.md) |
 | **Priority** | P0 |
+| **Figma Design** | [Password Recovery flow](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9/MDFoods.vn?node-id=246-6664&t=lmZ9cfhbP73agc81-4) |
 
 ---
 

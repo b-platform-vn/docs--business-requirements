@@ -1,13 +1,12 @@
 - [Home](/)
 - [Product Overview](products/README.md)
-- **Guides**
-  - [Capture a Page into Figma](guides/figma-page-capture.md)
 - **Back-office**
   - [CRM](products/crm/README.md)
 - **Customer-facing**
   - MDFoods
     - [Overview](products/mdfoods/README.md)
     - [Stack / Tools](products/mdfoods/stack.md)
+    - [Figma UX/UI Guide](products/mdfoods/figma_guide.md)
     - [Features](products/mdfoods/features/web.md)
       - [01. Master Layout](products/mdfoods/features/01-master-layout.md)
       - [02. Landing Page](products/mdfoods/features/02-landing-page.md)
@@ -28,5 +27,6 @@
       - [17. Order & Payment](products/mdfoods/features/17-order-and-payment.md)
       - [18. Orders Management](products/mdfoods/features/18-orders-management.md)
       - [19. Messages & Notifications](products/mdfoods/features/19-in-app-messages-notification.md)
+        - [20. Password Recovery](products/mdfoods/features/20-password-recovery.md)
   - [Odeli](products/odeli/README.md)
   - [LFarm](products/lfarm/README.md)
