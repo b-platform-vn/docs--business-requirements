@@ -7,8 +7,8 @@
 | **Product** | [MDFoods](/products/mdfoods/README.md) |
 | **Priority** | P0 |
 | **Figma** | [Design](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9?node-id=89-2) |
-
 | **Tracklogs** | [Multica BPL-245](https://tasks.tvlong.me/issues/BPL-245) |
+
 ---
 
 ## The Problem

@@ -6,8 +6,8 @@
 | **Updated** | 2026.07.17 |
 | **Product** | [MDFoods](/products/mdfoods/README.md) |
 | **Priority** | P0 |
-
 | **Tracklogs** | [Multica BPL-252](https://tasks.tvlong.me/issues/BPL-252) |
+
 ---
 
 ## The Problem
