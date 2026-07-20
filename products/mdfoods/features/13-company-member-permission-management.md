@@ -7,6 +7,7 @@
 | **Product** | [MDFoods](/products/mdfoods/README.md) |
 | **Priority** | P1 |
 
+| **Tracklogs** | [Multica BPL-250](https://tasks.tvlong.me/issues/BPL-250) |
 ---
 
 ## The Problem

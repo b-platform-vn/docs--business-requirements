@@ -8,6 +8,7 @@
 | **Priority** | P0 |
 | **Figma Design** | [Password Recovery flow](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9/MDFoods.vn?node-id=246-6664&t=lmZ9cfhbP73agc81-4) |
 
+| **Tracklogs** | [Multica BPL-257](https://tasks.tvlong.me/issues/BPL-257) |
 ---
 
 ## The Problem
