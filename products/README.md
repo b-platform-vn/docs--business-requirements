@@ -17,6 +17,8 @@ graph TD
     Ecosystem --> BO[🗂️ Back-office]
     Ecosystem --> CF[🛍️ Customer-facing]
 
+    BO --> General[B-Platform / General]
+    BO --> ID[B-Platform / ID]
     BO --> CRM[CRM]
 
     CF --> MDFoods[MDFoods]
@@ -26,6 +28,8 @@ graph TD
     style Ecosystem fill:#1a73e8,color:#fff
     style BO fill:#607D8B,color:#fff
     style CF fill:#FF9800,color:#fff
+    style General fill:#1a73e8,color:#fff
+    style ID fill:#9C27B0,color:#fff
     style CRM fill:#34a853,color:#fff
     style MDFoods fill:#E91E63,color:#fff
     style Odeli fill:#00BCD4,color:#fff
@@ -38,6 +42,8 @@ graph TD
 
 | Product / Business Unit | Domain | Key Responsibility |
 |---|---|---|
+| [B-Platform / General](/products/bplatform-general/) | Global UX, Shared Navigation & Platform Functions | Shared global navigation, global search, app shell behavior, and reusable cross-product UX requirements. |
+| [B-Platform / ID](/products/bplatform-id/) | Identity, Authentication & Authorization | Central SSO authentication service and identity management foundation for ecosystem applications. |
 | [Customer Relationship Management (CRM)](/products/crm/) | Customer Management, Communication & Support | Unified platform for managing customers, communicating across all channels, and handling customer support. |
 
 ## Customer-facing
@@ -57,6 +63,10 @@ graph TD
 ```
 products/
 ├── README.md                      ← You are here (Overview)
+├── bplatform-general/             ← Back-office / Platform Foundation: Global functions and shared UX
+│   └── README.md
+├── bplatform-id/                  ← Back-office / Platform Foundation: Identity and SSO
+│   └── README.md
 ├── crm/                           ← Back-office: CRM detail hub
 │   ├── README.md
 │   └── features/
