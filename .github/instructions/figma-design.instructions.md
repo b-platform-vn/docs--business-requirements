@@ -46,6 +46,35 @@ Use `generate_figma_design` only when importing or capturing an existing web pag
 6. Use `Archivo` typography for MDFoods UI text.
 7. Validate important updates after writing, including button usage and typography when relevant.
 
+## Required design quality loop
+
+Before considering any MDFoods design work complete, run this three-step loop until all steps pass:
+
+### Step 1 — Create design from requirements
+
+- Create a design that fits the stated product, business, and user requirements.
+- Make the data requirements explicit, especially what information the UI needs to collect from the user.
+- Ensure required user inputs, optional inputs, validation states, helper text, and submission outcomes are represented when relevant.
+- If the requirements are ambiguous, make safe assumptions visible and design the minimum clear flow needed to satisfy the current scope.
+
+### Step 2 — Validate visual design
+
+- Validate that the correct MDFoods layout, components, page composition, and visual samples are used.
+- Ensure UI elements do not overlap, break, clip unexpectedly, or create unusable spacing.
+- Ensure colors follow the MDFoods color-variable and palette guidance.
+- Ensure typography follows the `Archivo` typography rules from `products/mdfoods/figma_guide.md`.
+- Ensure buttons, inputs, containers, and responsive layouts follow the component reuse rules.
+- If any visual-design issue is found, fix it and validate again.
+- Repeat this step until no visual-design errors are found.
+
+### Step 3 — Validate UX clarity
+
+- Validate that a user with no prior knowledge of the product can still guess how to use the screen or flow.
+- Ensure labels, helper text, empty states, validation messages, CTAs, navigation paths, and success/error states make the intended action obvious.
+- Ensure the design communicates what happens next after the user submits or completes an action.
+- If the UX is unclear, return to Step 1, rework the solution, and repeat the full loop.
+- Only stop when Step 1, Step 2, and Step 3 all pass.
+
 ## Component reuse rules
 
 - Use `Header`, `Certifications`, `Footer`, `Product Card`, and `Input` from the component inventory in `figma_guide.md`.
