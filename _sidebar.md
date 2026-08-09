@@ -40,3 +40,35 @@
       - [20. Password Recovery](products/mdfoods/features/20-password-recovery.md)
   - [Odeli](products/odeli/README.md)
   - [LFarm](products/lfarm/README.md)
+- **Code Bases**
+  - [Overview](code_bases/README.md)
+  - L0 — Shared & Docs
+    - [sdk-platform](code_bases/sdk-platform.md)
+    - [docs-platform](code_bases/docs-platform.md)
+  - L1 — User Interaction
+    - [bof-web-bplatform](code_bases/bof-web-bplatform.md)
+    - [cfc-web-mdfoods](code_bases/cfc-web-mdfoods.md)
+    - [cfc-web-asfoods](code_bases/cfc-web-asfoods.md)
+    - [cfc-web-di5](code_bases/cfc-web-di5.md)
+    - [cfc-web-lfarm](code_bases/cfc-web-lfarm.md)
+    - [cfc-web-mcm](code_bases/cfc-web-mcm.md)
+  - L2 — API Services
+    - [api-service-orchestrator](code_bases/api-service-orchestrator.md)
+    - [api-service-identity](code_bases/api-service-identity.md)
+    - [api-service-ecom](code_bases/api-service-ecom.md)
+    - [api-service-organization](code_bases/api-service-organization.md)
+    - [api-service-crm](code_bases/api-service-crm.md)
+    - [api-service-integration](code_bases/api-service-integration.md)
+    - [api-service-content](code_bases/api-service-content.md)
+    - [api-service-social](code_bases/api-service-social.md)
+  - L3 — Database Operators
+    - [dbo-queue](code_bases/dbo-queue.md)
+    - [dbo-head](code_bases/dbo-head.md)
+    - [dbo-metadata](code_bases/dbo-metadata.md)
+    - [dbo-worker-mssql](code_bases/dbo-worker-mssql.md)
+    - [dbo-worker-mongodb](code_bases/dbo-worker-mongodb.md)
+    - [dbo-worker-postgresql](code_bases/dbo-worker-postgresql.md)
+  - Platform Infra
+    - [platform-fluxcd](code_bases/platform-fluxcd.md)
+    - [platform-workflows](code_bases/platform-workflows.md)
+  - [Deprecated](code_bases/deprecated/deprecated.md)
