@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Author** | tvlong |
-| **Updated** | 2026.07.17 |
+| **Updated** | 2026.08.05 |
 | **Product** | [MDFoods](/products/mdfoods/README.md) |
 | **Priority** | P0 |
 | **Design** | [Figma](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9/MDFoods.vn?node-id=71-2) |
@@ -34,7 +34,7 @@ A **Product Search** feature allowing customers to search products across all ca
 ### Measurable Outcomes
 
 - Search success rate (searches resulting in a product view).
-- Average time from search to cart-add.
+- Average time from search to add-to-quote.
 
 ## Requirements
 

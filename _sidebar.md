@@ -1,6 +1,16 @@
 - [Home](/)
 - [Product Overview](products/README.md)
+- **Platform Foundation**
+  - UniGate
+    - [Overview](products/unigate/README.md)
+    - [Customer Authentication & SSO](products/unigate/features/01-customer-authentication-sso.md)
+    - [Customer Account Administration](products/unigate/features/02-customer-account-administration.md)
 - **Back-office**
+  - [B-Platform / General](products/bplatform-general/README.md)
+  - B-Platform / UniGate
+    - [Overview](products/bplatform-unigate/README.md)
+    - [Application Management](products/bplatform-unigate/features/01-application-management.md)
+    - [User Management](products/bplatform-unigate/features/02-user-management.md)
   - [CRM](products/crm/README.md)
 - **Customer-facing**
   - MDFoods

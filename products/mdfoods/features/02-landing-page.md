@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Author** | tvlong |
-| **Updated** | 2026.07.17 |
+| **Updated** | 2026.08.05 |
 | **Product** | [MDFoods](/products/mdfoods/README.md) |
 | **Priority** | P0 |
 | **Figma** | [MDFoods.vn — Landing Page](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9/MDFoods.vn?node-id=60-2&t=K7EdQQCYiiIV9cyM-4) |
@@ -14,7 +14,7 @@
 
 Business customers arriving at MDFoods need a clear entry point that communicates what the platform offers, highlights current promotions, and guides them toward product discovery. Without a well-structured home page:
 
-- New visitors don't immediately understand that MDFoods is a B2B wholesale platform for agricultural products and food.
+- New visitors don't immediately understand that MDFoods is a B2B wholesale platform for food supplement products.
 - Returning customers want quick access to promotions, new arrivals, and popular items.
 - Product discovery suffers without clear category navigation on the landing page.
 

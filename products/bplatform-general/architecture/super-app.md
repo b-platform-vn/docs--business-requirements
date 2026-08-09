@@ -12,7 +12,7 @@
 
 ## Overview
 
-`B-Platform / General` is the **B-Platform Super App**. It is the internal platform shell where internal users sign in, navigate, search, and use installed applications such as **B-Platform ID**, **B-Platform CRM**, **B-Platform Product**, **B-Platform Sale**, and future apps.
+`B-Platform / General` is the **B-Platform Super App**. It is the internal platform shell where internal users sign in, navigate, search, and use installed applications such as **B-Platform / UniGate**, **B-Platform CRM**, **B-Platform Product**, **B-Platform Sale**, and future apps.
 
 The Super App provides the shared runtime and user experience. Installed apps contribute components into the Super App at bootstrap time. Those components include server actions, navigation entries, routes, search providers, permissions, dependencies, and service endpoints.
 
@@ -80,14 +80,14 @@ graph TD
     end
 
     subgraph InstalledApps[Installed Apps]
-        ID[B-Platform ID App]
+        UniGate[B-Platform / UniGate App]
         CRM[B-Platform CRM App]
         Product[B-Platform Product App]
         Sale[B-Platform Sale App]
     end
 
     subgraph InternalAPIs[Internal API Services]
-        IDAPI[ID Internal API]
+        UniGateAPI[UniGate Internal API]
         CRMAPI[CRM Internal API]
         ProductAPI[Product Internal API]
         SaleAPI[Sale Internal API]
@@ -99,12 +99,12 @@ graph TD
     Shell --> Search
     Shell --> Kernel
     Kernel --> Registry
-    ID --> Registry
+    UniGate --> Registry
     CRM --> Registry
     Product --> Registry
     Sale --> Registry
     Registry --> Gateway
-    Gateway --> IDAPI
+    Gateway --> UniGateAPI
     Gateway --> CRMAPI
     Gateway --> ProductAPI
     Gateway --> SaleAPI
@@ -113,7 +113,7 @@ graph TD
     style Kernel fill:#607D8B,color:#fff
     style Registry fill:#9C27B0,color:#fff
     style Gateway fill:#34a853,color:#fff
-    style ID fill:#F44336,color:#fff
+    style UniGate fill:#F44336,color:#fff
     style CRM fill:#00BCD4,color:#fff
     style Product fill:#FF9800,color:#fff
     style Sale fill:#E91E63,color:#fff
@@ -139,6 +139,8 @@ Example fields:
 | `routes` | UI routes/pages contributed to the Super App. |
 | `apiClients` | Server-side API clients/endpoints used by the app. |
 | `healthCheck` | Optional startup/runtime health check. |
+
+> Note: `B-Platform / UniGate` is the management-side product name. Existing examples may keep `id.*` capability keys as stable technical contracts unless an explicit API migration renames those keys.
 
 Example manifest shape:
 
@@ -344,16 +346,16 @@ sequenceDiagram
     participant CRM as CRM App
     participant Kernel as Super App Kernel
     participant Registry as Capability Registry
-    participant ID as ID App
-    participant IDAPI as ID Internal API
+    participant UniGate as B-Platform / UniGate App
+    participant UniGateAPI as UniGate Internal API
 
     CRM->>Kernel: Request authorization.checkPermission(user, permission)
     Kernel->>Registry: Lookup provider for authorization.checkPermission
-    Registry-->>Kernel: Provider is ID App
-    Kernel->>ID: Execute authorization.checkPermission
-    ID->>IDAPI: Call server-side internal API
-    IDAPI-->>ID: Permission decision
-    ID-->>Kernel: Function result
+    Registry-->>Kernel: Provider is B-Platform / UniGate App
+    Kernel->>UniGate: Execute authorization.checkPermission
+    UniGate->>UniGateAPI: Call server-side internal API
+    UniGateAPI-->>UniGate: Permission decision
+    UniGate-->>Kernel: Function result
     Kernel-->>CRM: Forward result
 ```
 
@@ -372,9 +374,9 @@ Function call requirements:
 
 ### Authentication
 
-The Super App provides the shared internal sign-in and initialization UX, but it does not own user storage or credential verification. It requests those capabilities from `B-Platform ID` through the kernel `execute(...)` function contract.
+The Super App provides the shared internal sign-in and initialization UX, but it does not own user storage or credential verification. It requests those capabilities from `B-Platform / UniGate` through the kernel `execute(...)` function contract.
 
-The Super App identifies itself with `app_id: "b-platform"` when requesting authentication-related ID capabilities.
+The Super App identifies itself with `app_id: "b-platform"` when requesting authentication-related UniGate capabilities.
 
 #### Initialization check
 
@@ -394,7 +396,7 @@ Expected behavior:
 
 #### Root-user initialization
 
-When initialization is required, the Super App requests root-user creation through an ID-provided capability. The exact payload can evolve with the ID app contract, but it must be executed through the kernel registry.
+When initialization is required, the Super App requests root-user creation through a UniGate-provided capability. The exact payload can evolve with the B-Platform / UniGate app contract, but it must be executed through the kernel registry.
 
 ```ts
 const result = await execute("id.users.{app_id}.initializeRoot", {
@@ -407,14 +409,14 @@ const result = await execute("id.users.{app_id}.initializeRoot", {
 
 Expected behavior:
 
-- ID must verify again that the app is not initialized before creating the root user.
-- ID must atomically create the first root user to prevent duplicate initialization.
+- B-Platform / UniGate must verify again that the app is not initialized before creating the root user.
+- B-Platform / UniGate must atomically create the first root user to prevent duplicate initialization.
 - After success, the Super App continues into the authenticated internal experience.
 - If another process initialized the app first, the Super App must switch to normal sign-in.
 
 #### User authentication
 
-When the app is initialized, the Super App requests authentication through ID:
+When the app is initialized, the Super App requests authentication through B-Platform / UniGate:
 
 ```ts
 const session = await execute("id.users.{app_id}.authenticate", {
@@ -426,14 +428,14 @@ const session = await execute("id.users.{app_id}.authenticate", {
 
 Expected behavior:
 
-- ID validates the credentials for the `b-platform` internal app context.
-- ID returns an authenticated session result or a typed authentication failure.
+- B-Platform / UniGate validates the credentials for the `b-platform` internal app context.
+- B-Platform / UniGate returns an authenticated session result or a typed authentication failure.
 - The Super App must not expose password values in logs, URLs, browser storage, or client-visible errors.
 - Authentication failures must use safe wording and avoid account enumeration.
 
 #### Session and sign-out
 
-The Super App should also use ID-provided capabilities for session inspection and sign-out:
+The Super App should also use B-Platform / UniGate-provided capabilities for session inspection and sign-out:
 
 ```ts
 const session = await execute("id.users.{app_id}.session", {
@@ -449,20 +451,20 @@ Authentication capability requirements:
 
 - [P0] Authentication-related Super App calls must go through `execute(...)`.
 - [P0] The `app_id` for the Super App must be `b-platform`.
-- [P0] ID must own initialization state, root-user creation, credential verification, session lookup, and sign-out execution.
+- [P0] B-Platform / UniGate must own initialization state, root-user creation, credential verification, session lookup, and sign-out execution.
 - [P0] The Super App must own the user-facing sign-in and initialization UX.
 - [P0] The Super App must treat unhandled authentication functions as degraded/unavailable states.
 - [P0] The Super App must never log plaintext passwords.
 
 ### Authorization
 
-Authorization capabilities come from `B-Platform ID` and are consumed through the Super App registry.
+Authorization capabilities come from `B-Platform / UniGate` and are consumed through the Super App registry.
 
 Examples:
 
-- CRM requests `authorization.checkPermission` from ID before rendering restricted customer functions.
-- Product requests `authorization.listUserPermissions` from ID to conditionally show management actions.
-- Sale requests role/permission checks from ID before quote approval.
+- CRM requests `authorization.checkPermission` from B-Platform / UniGate before rendering restricted customer functions.
+- Product requests `authorization.listUserPermissions` from B-Platform / UniGate to conditionally show management actions.
+- Sale requests role/permission checks from B-Platform / UniGate before quote approval.
 
 ### Global Navigation
 
@@ -490,12 +492,12 @@ Search requirements:
 
 | Requester | Required feature | Provider | Example |
 |---|---|---|---|
-| Super App | Sign-in / initialization | B-Platform ID | Create first root user and verify sessions. |
-| CRM | Authorization | B-Platform ID | Check whether a user can view or edit customer records. |
+| Super App | Sign-in / initialization | B-Platform / UniGate | Create first root user and verify sessions. |
+| CRM | Authorization | B-Platform / UniGate | Check whether a user can view or edit customer records. |
 | CRM | Product data | B-Platform Product | Attach product information to a customer opportunity. |
 | CRM | Sales data | B-Platform Sale | Convert a customer conversation into a quote or order. |
 | Sale | Product catalog | B-Platform Product | Add products to a quote. |
-| Product | Authorization | B-Platform ID | Restrict product configuration functions by permission. |
+| Product | Authorization | B-Platform / UniGate | Restrict product configuration functions by permission. |
 
 ## Next.js Runtime Responsibilities
 

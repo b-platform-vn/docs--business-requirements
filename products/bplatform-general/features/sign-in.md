@@ -13,7 +13,7 @@
 
 ## The Problem
 
-Internal B-Platform users need one consistent sign-in experience to access internal applications such as **B-Platform ID**, **B-Platform CRM**, **B-Platform Product**, **B-Platform Sale**, and future internal products. The platform also needs a safe first-run initialization process because a fresh system has no users yet.
+Internal B-Platform users need one consistent sign-in experience to access internal applications such as **B-Platform / UniGate**, **B-Platform CRM**, **B-Platform Product**, **B-Platform Sale**, and future internal products. The platform also needs a safe first-run initialization process because a fresh system has no users yet.
 
 Without a shared General Sign-in feature:
 
@@ -21,11 +21,11 @@ Without a shared General Sign-in feature:
 - Internal apps may duplicate sign-in screens and session checks.
 - A fresh system may be unusable because no root user exists yet.
 - Account creation may happen through uncontrolled sign-up paths after the system is initialized.
-- Products may confuse General internal-platform sign-in with `B-Platform / ID` user-management features.
+- Products may confuse General internal-platform sign-in with `B-Platform / UniGate` user-management features.
 
 ## Proposed Solution
 
-A shared **General Sign-in** feature that allows internal users to sign in once and access internal B-Platform applications according to their permissions. If the system has no users, the sign-in screen switches to a controlled initialization process that creates the first **root user**. After the first root user is created, public/self-service account creation is disabled forever; all new accounts must be created through **B-Platform ID / Users**.
+A shared **General Sign-in** feature that allows internal users to sign in once and access internal B-Platform applications according to their permissions. If the system has no users, the sign-in screen switches to a controlled initialization process that creates the first **root user**. After the first root user is created, public/self-service account creation is disabled forever; all new accounts must be created through **B-Platform / UniGate / Users**.
 
 ### Goals
 
@@ -34,13 +34,13 @@ A shared **General Sign-in** feature that allows internal users to sign in once 
 - Detect first-run system state when no users exist.
 - Allow creation of exactly one initial root user during first-run initialization.
 - Prevent any account creation from the sign-in screen after initialization.
-- Direct all future account creation to `B-Platform ID / Users`.
+- Direct all future account creation to `B-Platform / UniGate / Users`.
 
 ### Out-of-scope
 
 - Customer-facing sign-in for public products such as storefronts.
 - Self-service registration after system initialization.
-- User, role, and permission management screens; those belong to [B-Platform / ID](/products/bplatform-id/README.md).
+- User, role, and permission management screens; those belong to [B-Platform / UniGate](/products/bplatform-unigate/README.md).
 - Password recovery and MFA details unless explicitly added as separate features.
 - Product-specific post-login workflows beyond routing the user to the requested internal application.
 
@@ -59,7 +59,7 @@ A shared **General Sign-in** feature that allows internal users to sign in once 
 
 - [P0] If an internal user opens a protected internal application without an authenticated internal session, the application must show or redirect to the shared General Sign-in screen.
 - [P0] Internal applications include, but are not limited to:
-  - B-Platform ID,
+  - B-Platform / UniGate,
   - B-Platform CRM,
   - B-Platform Product,
   - B-Platform Sale,
@@ -104,8 +104,8 @@ A shared **General Sign-in** feature that allows internal users to sign in once 
 
 - [P0] After initialization, no one can create a new account from the General Sign-in screen.
 - [P0] After initialization, no public/self-service account creation endpoint should be available for internal users.
-- [P0] New internal user accounts must be created only through `B-Platform ID / Users`.
-- [P0] The `B-Platform ID / Users` function must enforce authorization before allowing account creation.
+- [P0] New internal user accounts must be created only through `B-Platform / UniGate / Users`.
+- [P0] The `B-Platform / UniGate / Users` function must enforce authorization before allowing account creation.
 - [P0] If a user tries to access an initialization or create-root-user path after initialization, the system must reject the request.
 - [P0] Rejected initialization attempts must not reveal sensitive user-count or root-user details beyond a safe message.
 
@@ -158,7 +158,7 @@ sequenceDiagram
     participant User as Internal User
     participant App as Internal B-Platform App
     participant General as B-Platform / General Sign-in
-    participant ID as B-Platform ID / Users
+    participant UniGate as B-Platform / UniGate / Users
 
     User->>App: Open internal application
     App->>General: Request internal session
@@ -167,8 +167,8 @@ sequenceDiagram
         General->>User: Show initialization screen
         User->>General: Submit root-user details
         General-->>General: Verify no users still exist
-        General->>ID: Create first root user
-        ID-->>General: Root user created
+        General->>UniGate: Create first root user
+        UniGate-->>General: Root user created
         General->>App: Continue as authenticated root user
     else One or more users exist
         General->>User: Show normal sign-in screen
@@ -187,14 +187,14 @@ sequenceDiagram
 | Area | Owner |
 |---|---|
 | Internal sign-in UX, initialization UX, return-target behavior | B-Platform / General |
-| User records, role assignment, permission model, post-initialization account creation | B-Platform / ID |
+| User records, role assignment, permission model, post-initialization account creation | B-Platform / UniGate |
 | Product-specific protected functions and authorization checks | Target internal application |
 
 ### Internal application examples
 
 | Application | Purpose |
 |---|---|
-| B-Platform ID | Manage applications, users, roles, and permissions. |
+| B-Platform / UniGate | Manage UniGate applications, users, roles, permissions, customer accounts, and product access. |
 | B-Platform CRM | Manage customer relationship, communication, and support operations. |
 | B-Platform Product | Manage products, catalogs, attributes, and product-related configuration. |
 | B-Platform Sale | Manage sales operations, quotes, orders, and sales workflows. |

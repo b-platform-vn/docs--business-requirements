@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Author** | tvlong |
-| **Updated** | 2026.07.17 |
+| **Updated** | 2026.08.05 |
 | **Product** | [MDFoods](/products/mdfoods/README.md) |
 | **Priority** | P0 |
 | **Design** | [Figma](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9/MDFoods.vn?node-id=67-2&t=IlEz7GtYVk6JN31L-4) |
@@ -58,7 +58,7 @@ A **Product List by Category** page that displays products grouped and filterabl
 ### Actions
 
 - [P0] Click product to view Product Detail.
-- [P1] Quick "Add to cart" from list.
+- [P1] Quick "Add to quote" from list.
 
 ## Appendix
 

@@ -1,20 +1,27 @@
 ---
-description: "Use when working with MDFoods Figma designs, UI mockups, design-to-code, code-to-design, or figma.com links in this repository."
-applyTo: "products/mdfoods/**,**/*figma*"
+description: "Use when working with B-Platform Super App or MDFoods Figma designs, UI mockups, design-to-code, code-to-design, or figma.com links in this repository."
+applyTo: "products/bplatform-general/**,products/mdfoods/**,**/*figma*"
 ---
 
-# MDFoods Figma Design Instructions
+# B-Platform and MDFoods Figma Design Instructions
 
-Use these instructions when creating, editing, inspecting, syncing, or implementing MDFoods UX/UI designs with Figma tools.
+Use these instructions when creating, editing, inspecting, syncing, or implementing B-Platform Super App or MDFoods UX/UI designs with Figma tools.
 
 ## Source of truth
 
-- Primary Figma file: `https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9/MDFoods.vn`
-- Primary file key: `LhJxbmnpQ1D7CY3SIvyCU9`
-- Components page node: `117:85`
+- MDFoods Figma file: `https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9/MDFoods.vn`
+- MDFoods file key: `LhJxbmnpQ1D7CY3SIvyCU9`
+- MDFoods components page node: `117:85`
 - MDFoods component and token guide: `products/mdfoods/figma_guide.md`
+- B-Platform Super App Figma file: `https://www.figma.com/design/uIeicyHJ4gCqCe0SdRTaby/B-Platform-Designs`
+- B-Platform file key: `uIeicyHJ4gCqCe0SdRTaby`
+- B-Platform guide: `products/bplatform-general/figma_guide.md`
+- B-Platform full component design catalog: `products/bplatform-general/design-catalog.md`
+- B-Platform reference docs: `products/bplatform-general/README.md` and `products/bplatform-general/features/sign-in.md`
+- **B-Platform Designs is a full clone of the Sneat Vuetify NuxtJS Admin Template** (`https://demos.themeselection.com/sneat-vuetify-nuxtjs-admin-template/demo-1`, e.g. its [CRM dashboard](https://demos.themeselection.com/sneat-vuetify-nuxtjs-admin-template/demo-1/dashboards/crm)) — reproduce the live template's layout, components, and behavior exactly; do not treat it as loose inspiration.
+- **Supported device viewports for B-Platform screens: Mobile, iPad, and Web** — design all three per screen/feature unless the user explicitly scopes a screen as desktop-only. See `products/bplatform-general/figma_guide.md` for exact widths and responsive behavior per viewport.
 
-Before doing any MDFoods design work, read `products/mdfoods/figma_guide.md` and follow its current component inventory, node IDs, color variables, typography rules, button rules, and page composition order.
+Before doing any B-Platform design work, read `products/bplatform-general/figma_guide.md` and `products/bplatform-general/design-catalog.md`, and follow their shared shell, navigation, search, color, typography, button, input, table, and sign-in patterns.
 
 ## When to use Figma tools
 
@@ -32,9 +39,33 @@ Use `get_metadata` only for lightweight structure discovery when the exact node 
 
 Use `get_screenshot` when visual validation or a compact image reference is needed.
 
-Use `use_figma` for write operations such as creating nodes, cloning components, editing layouts, binding variables, changing text, or validating component usage. Always load the `figma-use` skill guidance before calling `use_figma`.
+Use `use_figma` for write operations such as creating nodes, cloning components, editing layouts, binding variables, changing text, updating Design Catalogs, creating component family rows, adding component variants, or validating component usage. Always load the `figma-use` skill guidance before calling `use_figma`.
 
 Use `generate_figma_design` only when importing or capturing an existing web page into an existing Figma design file. For MDFoods page capture, follow the capture workflow in `.github/copilot-instructions.md`.
+
+## Live website reference workflow
+
+When the user asks to use a live website as the design reference/referrer, treat that as an explicit request to capture, inspect, and componentize the reference before creating the requested design.
+
+1. Try to load the referred website in supported viewports for the requested scope:
+	- Desktop: `1920x1080`
+	- iPad
+	- iPhone / Mobile
+2. Capture the live page for Design into the current working Figma page.
+3. Inspect the captured design and extract reusable component candidates, including layout primitives, cards, tables, forms, inputs, buttons, navigation, chips, alerts, empty states, and responsive/state patterns.
+4. Consolidate extracted findings with available reusable components in the Design Catalogs:
+	- Reuse existing Design Catalog components first.
+	- If a finding belongs to an existing component family, add it as another variant instead of creating a duplicate family.
+	- If no suitable family exists, create a new component family row in the Design Catalogs Storage page.
+5. Create the requested design from Design Catalog components and variants, not directly from the raw capture.
+
+### Design Catalogs storage rules
+
+- Use a Figma page as Design Catalogs Storage.
+- Keep each component family in one row.
+- Represent each component variant as a Frame in that row.
+- Every component should have at least two sizing stages: `FILL` and `HUG`.
+- Keep captured raw pages as references only; componentized output should come from cataloged reusable parts.
 
 ## Required MDFoods workflow
 

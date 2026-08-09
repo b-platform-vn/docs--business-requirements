@@ -25,6 +25,7 @@
 | 17 | [Order & Payment](/products/mdfoods/features/17-order-and-payment.md) | P0 | Place order and pay |
 | 18 | [Orders Management](/products/mdfoods/features/18-orders-management.md) | P0 | View and track order history |
 | 19 | [In-App Messages and Notification](/products/mdfoods/features/19-in-app-messages-notification.md) | P1 | Real-time messaging via CRM |
+| 20 | [Password Recovery](/products/mdfoods/features/20-password-recovery.md) | P0 | Recover account access and reset passwords securely |
 
 ## Feature Journey
 
@@ -32,6 +33,7 @@
 graph LR
     Browse[🔍 Browse & Search<br/>F3, F4, F5] --> Cart[🛒 Shopping Cart<br/>F14]
     Register[📝 Register & Auth<br/>F8, F9] --> Cart
+    Recovery[🔑 Password Recovery<br/>F20] --> Register
     Cart --> Quote[💬 Request Quote<br/>F15]
     Quote --> QM[📋 Quote Management<br/>F16]
     QM --> Order[💳 Order & Payment<br/>F17]
@@ -44,6 +46,7 @@ graph LR
     style Quote fill:#4CAF50,color:#fff
     style Order fill:#9C27B0,color:#fff
     style Msg fill:#607D8B,color:#fff
+    style Recovery fill:#795548,color:#fff
 ```
 
 ## PRD Template

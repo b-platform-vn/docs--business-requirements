@@ -2,14 +2,39 @@
 
 ## Figma Web Page Capture Workflow
 
-Use these instructions whenever capturing a live web page into a Figma design file with the Figma MCP capture tool.
+Use these instructions whenever capturing a live web page into a Figma design file with the Figma MCP capture tool, or whenever the user asks to use a live website as a design reference/referrer.
+
+### Live website reference-to-design flow
+
+When asked to use a live website as the reference/referrer for a requested design, follow this process:
+
+1. Try to load the referred website in each supported viewport needed for the request:
+   - Desktop: `1920x1080`
+   - iPad
+   - iPhone
+2. Capture the page for Design into the current working Figma page.
+3. Inspect the captured design and extract reusable component candidates, including layout primitives, cards, form controls, navigation, tables, CTAs, chips, alerts, and state patterns.
+4. Consolidate new findings with the available reusable components in the Design Catalogs.
+   - Reuse existing catalog components first.
+   - If a captured pattern extends an existing component family, adjust the existing component by adding the new finding as another variant instead of creating a separate duplicate family.
+   - If no matching component family exists, create a new catalog family from the captured pattern.
+5. Create the requested design from Design Catalog components, not directly from the raw capture.
+
+Important catalog rules:
+
+- Use a Figma page as Design Catalogs Storage.
+- Keep each component family in one row.
+- Represent each component variant as a Frame in that row.
+- Every component should have at least two sizing stages: `FILL` and `HUG`.
+- Treat the raw captured page as a reference source only; do not leave it as the final componentized design unless the user specifically asks for a raw capture.
 
 ### Choose the right browser resolution
 
 Before capturing a screenshot for Figma design, open the browser in simulator mode for the target screen resolution:
 
 - Web/Desktop: `1920x1080`
-- Mobile
+- iPad
+- iPhone / Mobile
 
 By default, use the Web/Desktop resolution. Only switch to Mobile resolution when the user explicitly asks for a mobile capture.
 
@@ -61,7 +86,7 @@ Keep polling the same `fileKey` and `captureId` every few seconds until complete
 
 ### Result quality
 
-Figma capture imports raw frames and text, not linked design-system components. Treat the result as a pixel-perfect reference. If a componentized design is needed, rebuild the screen afterward with `use_figma` and design-system components.
+Figma capture imports raw frames and text, not linked design-system components. Treat the result as a pixel-perfect reference. If a componentized design is needed, rebuild the screen afterward from the Design Catalogs and design-system components.
 
 ## Multica Feature Description Workflow
 

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Author** | tvlong |
-| **Updated** | 2026.07.17 |
+| **Updated** | 2026.08.05 |
 | **Product** | [MDFoods](/products/mdfoods/README.md) |
 | **Priority** | P0 |
 | **Design** | [Figma](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9/MDFoods.vn) |
@@ -47,7 +47,7 @@ A set of **Static Pages** covering company information, policies, and guides —
 | 6.1 | About MDFoods | [P0] | Company introduction, story, mission | [Figma](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9?node-id=73-2) |
 | 6.2 | Partners and Customers | [P1] | Showcase trusted partnerships and customer base | [Figma](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9?node-id=72-2) |
 | 6.3 | Partners | [P1] | Detailed partner listing | [Figma](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9?node-id=74-2) |
-| 6.4 | HRDP | [P1] | HRDP program information | [Figma](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9?node-id=75-2) |
+| 6.4 | HRBP | [P1] | MDFoods people and HR business partner information | [Figma](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9?node-id=75-2) |
 | 6.5 | Supplying Guide | [P0] | How to become a supplier | [Figma](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9?node-id=76-2) |
 | 6.6 | Shopping Guide | [P0] | How to shop on the platform | [Figma](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9?node-id=77-2) |
 | 6.7 | Delivery Policy | [P0] | Shipping and delivery terms | [Figma](https://www.figma.com/design/LhJxbmnpQ1D7CY3SIvyCU9?node-id=78-2) |
@@ -75,7 +75,7 @@ A set of **Static Pages** covering company information, policies, and guides —
 
 **6.3 Partners** — Detailed partner directory with partnership types.
 
-**6.4 HRDP** — Program details, eligibility, benefits.
+**6.4 HRBP** — MDFoods people, workplace, and human-resources information.
 
 **6.5 Supplying Guide** — Step-by-step guide for potential suppliers to apply and onboard.
 

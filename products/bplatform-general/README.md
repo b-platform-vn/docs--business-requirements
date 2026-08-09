@@ -29,7 +29,7 @@ B-Platform / General is the **B-Platform Super App**. It defines the common runt
 - Defines global navigation behavior across modules and functions.
 - Defines global search behavior for cross-module and cross-function discovery.
 - Provides reusable UX patterns that product-specific teams should use instead of rebuilding one-off equivalents.
-- Separates platform-level shared assets from product-specific screens such as `B-Platform / ID`.
+- Separates platform-level shared assets from product-specific screens such as `B-Platform / UniGate`.
 - Documents shared interaction contracts so implementation and Figma designs stay aligned.
 
 ## Core Global Functions
@@ -81,7 +81,7 @@ Architecture details: [B-Platform Super App Architecture](/products/bplatform-ge
 
 ### 2. Sign-in Entry
 
-Sign-in entry is the shared internal authentication entry used by internal applications such as B-Platform ID, B-Platform CRM, B-Platform Product, B-Platform Sale, and future internal B-Platform applications.
+Sign-in entry is the shared internal authentication entry used by internal applications such as B-Platform / UniGate, B-Platform CRM, B-Platform Product, B-Platform Sale, and future internal B-Platform applications.
 
 Requirements:
 
@@ -89,7 +89,7 @@ Requirements:
 - Detect first-run system state when no users exist.
 - Show an initialization flow for creating the first root user only when no users exist.
 - Disable account creation from the sign-in screen after initialization.
-- Require all future account creation through `B-Platform ID / Users`.
+- Require all future account creation through `B-Platform / UniGate / Users`.
 - Preserve the user's original internal application, module, function, and safe return URL before authentication.
 - Distinguish uninitialized, unauthenticated, authenticated-but-unauthorized, and session-expired states to avoid broken setup flows and login loops.
 
@@ -169,7 +169,7 @@ Requirements:
 - Use shared selected states and keyboard accessibility patterns.
 - Use compact table/list density unless a product-specific workflow requires more spacious layouts.
 - Prefer global search for cross-product discovery and table-local search only when a specific table workflow requires it.
-- Use the square check-toggle pattern for compact boolean controls in Platform ID-style admin screens.
+- Use the square check-toggle pattern for compact boolean controls in UniGate-style admin screens.
 - Keep Lucide icons as the standard for new platform-level iconography.
 
 ## Boundaries
@@ -178,7 +178,8 @@ B-Platform / General owns shared platform-level behavior. Product-specific busin
 
 | Product | Boundary |
 |---|---|
-| [B-Platform / ID](/products/bplatform-id/) | Owns user records, application/client management, roles, permissions, authorization features, and identity capabilities consumed by the Super App. |
+| [UniGate](/products/unigate/) | Owns customer accounts, customer sign-up/sign-in, cross-product customer SSO, customer account lifecycle, and customer-facing product access decisions. |
+| [B-Platform / UniGate](/products/bplatform-unigate/) | Owns the management side of UniGate: application/client management, customer account administration, internal user records, roles, permissions, authorization features, and identity capabilities consumed by the Super App. |
 | [CRM](/products/crm/) | Owns customer management, communication, support, and sales handoff workflows. |
 | [MDFoods](/products/mdfoods/) | Owns B2B storefront, quote, order, and customer-facing purchasing flows. |
 | B-Platform / General | Owns the Super App runtime, app bootstrap, capability registry, global navigation, global search, shared shell, shared UX patterns, and reusable platform functions. |
@@ -199,7 +200,8 @@ graph TD
     end
 
     subgraph Products[Product Domains]
-        ID[B-Platform / ID]
+      UniGate[UniGate]
+        BPUG[B-Platform / UniGate]
         CRM[CRM]
         MDFoods[MDFoods]
         Future[Future Products]
@@ -207,16 +209,17 @@ graph TD
 
     Tokens --> Shell
     Kernel --> Registry
-    Registry --> ID
+    Registry --> BPUG
+    Registry --> UniGate
     Registry --> CRM
     Registry --> MDFoods
-    SignIn --> ID
+    SignIn --> BPUG
     Shell --> Nav
     Shell --> Search
-    Nav --> ID
+    Nav --> BPUG
     Nav --> CRM
     Nav --> MDFoods
-    Search --> ID
+    Search --> BPUG
     Search --> CRM
     Search --> MDFoods
     UX --> Products
@@ -251,7 +254,8 @@ graph TD
 | Platform design guidelines | Design system | Visual language, tokens, icon rules, layout rules, and validation expectations. |
 | Product domains | Ecosystem products | Module/function metadata and target destinations for global navigation and search. |
 | Installed apps | Platform apps | Permissions, functions, dependencies, routes, navigation entries, search providers, and internal API capabilities. |
-| B-Platform / ID | Platform Foundation | User records, root-user initialization, authentication capabilities, authorization features, roles, and permissions consumed through the Super App registry. |
+| [B-Platform / UniGate](/products/bplatform-unigate/) | Platform Foundation | Management-side capabilities for UniGate, including internal user records, root-user initialization, authentication capabilities, authorization features, roles, permissions, and customer account administration consumed through the Super App registry. |
+| [UniGate](/products/unigate/) | Platform Foundation | Customer identity, customer-facing authentication, SSO, product-access decisions, and core identity services. |
 
 ## Key Contacts
 
