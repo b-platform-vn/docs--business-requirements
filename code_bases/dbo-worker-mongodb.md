@@ -6,35 +6,39 @@
 | **v3 target** | `dbo-worker-mongodb` (L3) — new repo |
 | **Layer** | L3 — Database Operators |
 | **Status** | planned (new) |
-| **Role** | dbo-worker (stack: `mongodb`) |
-| **Language** | TBD (expected NestJS + Mongoose + TypeScript) |
+| **Role** | dbo-worker (stack: `mongodb`) — declares mode + cluster condition per entity |
+| **Language** | NestJS 11 + Mongoose 9 + TypeScript |
 | **Default branch** | `main` |
 
 Last synced: 2026-08-09
 
 ## Purpose
 
-MongoDB adapter for the DBO sub-layer. Executes query plans against MongoDB databases. Owns the MCM collections currently embedded across the `api-mcm-*` services.
+MongoDB adapter for the DBO sub-layer. Executes query plans against MongoDB databases. On boot, self-registers its supported entities + **mode** (`FullReadWrite` / `ClusteredReadWrite` / `FullWrite` / `FullRead` / `ClusteredWrite` / `ClusteredRead`) + optional **cluster condition** to [`dbo-metadata`](./dbo-metadata.md). Owns the MCM collections currently embedded across the `api-mcm-*` services.
 
 ## Responsibility
 
-- Translate logical query plans (from [`dbo-head`](./dbo-head.md)) into MongoDB-native queries (Mongoose).
-- Own MongoDB collection schemas + indexes.
+- **Self-register mode declarations** (R5), **Execute query plans**, **Migrations** (R4).
+- Full detail: [`technical-requirements/database-operation.md`](../technical-requirements/database-operation.md) (§3, §4, §9).
 
 ## Dependencies
 
-- **Runtime**: expected NestJS + `mongoose` + `@b-platform-vn/sdk-dbo-schemas` + `@b-platform-vn/sdk-dbo-streams`.
+- **Runtime**: NestJS 11 + `mongoose` 9 + `@b-platform-vn/sdk-platform/dbo-schemas` + `…/dbo-streams`.
 - **Upstream**: [`dbo-head`](./dbo-head.md) (only caller).
+- **Catalog**: [`dbo-metadata`](./dbo-metadata.md) (registers declarations on boot).
 - **Datastores**: MongoDB.
 
 ## Public API surface
 
-- Internal L3-only interface.
+- Internal L3-only interface: `execute(plan)`, `migrateUp/Down/Status` (R4), `getModeDeclarations()` (R5).
+- Default-cluster instance (`isDefaultCluster: true`) deployed via [`platform-fluxcd`](./platform-fluxcd.md) (R7).
 
 ## Notes
 
-- ⚠️ This repo does **not exist** on the remote yet. Phase 3 of the DBO rollout (multi-engine).
+- ⚠️ This repo does **not exist** on the remote yet. ADR: `/memories/repo/dbo-architecture.md`. Technical requirements: [`../technical-requirements/database-operation.md`](../technical-requirements/database-operation.md).
+- Phase 3 of the DBO rollout (multi-engine).
 - Shares schema ownership with the `mcm-schemas` subpath of [`sdk-platform`](./sdk-platform.md) (shared types) — this repo is the **operator** (runs migrations against real Mongo); the `sdk-platform/mcm-schemas` subpath is the **shared library** (types consumed in code). Don't merge them.
+- A single worker instance declares **one mode per entity**; combine modes by running separate worker instances.
 
 ## Owner
 
