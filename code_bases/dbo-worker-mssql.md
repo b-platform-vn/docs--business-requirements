@@ -2,10 +2,10 @@
 
 | | |
 |---|---|
-| **Repo** | `github.com/b-platform-vn/dbo-worker-mssql` (planned) |
-| **v3 target** | `dbo-worker-mssql` (L3) — new repo |
+| **Repo** | `github.com/b-platform-vn/dbo-worker-mssql` |
+| **v3 target** | `dbo-worker-mssql` (L3) — active |
 | **Layer** | L3 — Database Operators |
-| **Status** | planned (new) |
+| **Status** | active (repo created 2026-08-09) |
 | **Role** | dbo-worker (stack: `mssql`) — declares mode + cluster condition per entity |
 | **Language** | NestJS 11 + TypeORM + TypeScript |
 | **Default branch** | `main` |

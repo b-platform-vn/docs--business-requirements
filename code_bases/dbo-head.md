@@ -2,10 +2,10 @@
 
 | | |
 |---|---|
-| **Repo** | `github.com/b-platform-vn/dbo-head` (planned) |
-| **v3 target** | `dbo-head` (L3) — new repo |
+| **Repo** | `github.com/b-platform-vn/dbo-head` |
+| **v3 target** | `dbo-head` (L3) — active |
 | **Layer** | L3 — Database Operators |
-| **Status** | planned (new) |
+| **Status** | active (repo created 2026-08-09) |
 | **Role** | planner + fan-out + consolidator + policy engine + cluster router + transfer orchestrator (no stack) |
 | **Language** | NestJS 11 + TypeScript (Fastify adapter) |
 | **Default branch** | `main` |

@@ -2,10 +2,10 @@
 
 | | |
 |---|---|
-| **Repo** | `github.com/b-platform-vn/dbo-metadata` (planned) |
-| **v3 target** | `dbo-metadata` (L3) — new repo |
+| **Repo** | `github.com/b-platform-vn/dbo-metadata` |
+| **v3 target** | `dbo-metadata` (L3) — active |
 | **Layer** | L3 — Database Operators |
-| **Status** | planned (new) |
+| **Status** | active (repo created 2026-08-09) |
 | **Role** | worker/entity/mode/policy/cluster catalog (no stack) |
 | **Language** | TBD (config repo initially → runtime service with self-registration) |
 | **Default branch** | `main` |

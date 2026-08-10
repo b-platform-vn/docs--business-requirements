@@ -2,10 +2,10 @@
 
 | | |
 |---|---|
-| **Repo** | `github.com/b-platform-vn/dbo-queue` (planned) |
-| **v3 target** | `dbo-queue` (L3) — new repo |
+| **Repo** | `github.com/b-platform-vn/dbo-queue` |
+| **v3 target** | `dbo-queue` (L3) — active |
 | **Layer** | L3 — Database Operators |
-| **Status** | planned (new) |
+| **Status** | active (repo created 2026-08-09) |
 | **Role** | async ingress + cluster transfer job queue (no stack) |
 | **Language** | NestJS 11 + TypeScript |
 | **Default branch** | `main` |

@@ -2,10 +2,10 @@
 
 | | |
 |---|---|
-| **Repo** | `github.com/b-platform-vn/dbo-worker-postgresql` (planned) |
-| **v3 target** | `dbo-worker-postgresql` (L3) — new repo |
+| **Repo** | `github.com/b-platform-vn/dbo-worker-postgresql` |
+| **v3 target** | `dbo-worker-postgresql` (L3) — active (conditional) |
 | **Layer** | L3 — Database Operators |
-| **Status** | planned (new, **conditional**) |
+| **Status** | active (repo created 2026-08-09, **conditional**) |
 | **Role** | dbo-worker (stack: `postgresql`) — declares mode + cluster condition per entity |
 | **Language** | NestJS 11 + TypeORM + `pg` + TypeScript |
 | **Default branch** | `main` |

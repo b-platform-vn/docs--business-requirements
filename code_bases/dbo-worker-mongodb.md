@@ -2,10 +2,10 @@
 
 | | |
 |---|---|
-| **Repo** | `github.com/b-platform-vn/dbo-worker-mongodb` (planned) |
-| **v3 target** | `dbo-worker-mongodb` (L3) — new repo |
+| **Repo** | `github.com/b-platform-vn/dbo-worker-mongodb` |
+| **v3 target** | `dbo-worker-mongodb` (L3) — active |
 | **Layer** | L3 — Database Operators |
-| **Status** | planned (new) |
+| **Status** | active (repo created 2026-08-09) |
 | **Role** | dbo-worker (stack: `mongodb`) — declares mode + cluster condition per entity |
 | **Language** | NestJS 11 + Mongoose 9 + TypeScript |
 | **Default branch** | `main` |
