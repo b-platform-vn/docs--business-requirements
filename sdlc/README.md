@@ -385,4 +385,4 @@ This is **version 1** — focused on establishing the Who/What/When baseline. Ca
 
 > Change log: **v1 (2026-08-11)** — initial SDLC: 6 phases, human-role RACI, master matrix, Multica issue status workflow, artifacts, and Definition of Done.
 
-> 🇬🇧 **English** · [🇻🇳 Tiếng Việt](README.vi.md)
+> 🇬🇧 **English** · [🇻🇳 Tiếng Việt](sdlc/README.vi.md)

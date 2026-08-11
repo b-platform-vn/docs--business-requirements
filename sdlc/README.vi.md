@@ -4,7 +4,7 @@
 > Quy trình chuẩn mà đội Phát triển Phần mềm B-Platform dùng để biến **yêu cầu từ Business** thành **tính năng chạy trên Production**.
 > Tài liệu này là SDLC chuẩn cho tổ chức `github.com/bplatform-vn`. Nó ràng buộc **con người, vai trò, repo, và công cụ** theo hướng rõ ràng **Ai / Cái gì / Khi nào**.
 
-> 🇬🇧 [English version](README.md) · 🇻🇳 **Phiên bản Tiếng Việt**
+> 🇬🇧 [English version](sdlc/README.md) · 🇻🇳 **Phiên bản Tiếng Việt**
 
 ---
 

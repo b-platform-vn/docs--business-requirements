@@ -1,5 +1,5 @@
 ---
-name: "B-Platform Figma Design"
+name: "[B-Platform] Figma Design"
 description: "Use when working with B-Platform Super App Figma designs, shared shell screens, global navigation, sign-in flows, or design-to-code sync."
 tools: [vscode, execute, read, agent, edit, search, web, browser, 'com.figma.mcp/mcp/*', todo]
 argument-hint: "B-Platform Figma design task or request"

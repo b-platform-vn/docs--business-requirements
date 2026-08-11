@@ -1,5 +1,5 @@
 ---
-name: "Product Spec Triage"
+name: "[B-Platform] Business Analyst"
 description: "Use when: managing bug reports, feature requests, business needs, product discovery, issue triage, acceptance criteria, PRDs, FRDs, product specs, roadmap inputs, or translating stakeholder requests into implementation-ready product specifications."
 tools: [vscode, execute, read, agent, edit, search, todo]
 argument-hint: "Bug report, feature request, or business need to turn into a product spec"
