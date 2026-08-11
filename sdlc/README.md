@@ -93,16 +93,16 @@ The B-Platform SDLC maps the canonical phases onto the Super App kernel architec
 
 ### 4.1 Roles
 
-| Role                     | Owns                                                                                           | Scope boundary                                | Person in Charge (PiC)                                                                         |
-| ------------------------ | ---------------------------------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| **Business Stakeholder** | Originates business needs, validates outcomes, accepts features                                | Writing production code                       | Thái, Nhi                                                                                      |
-| **Product Owner**        | Prioritizes backlog, accepts specs, signs release scope                                        | Editing code, deploying                       | Long                                                                                           |
-| **Business Analyst**     | Product specs, acceptance criteria, FRDs, issue triage                                         | Writing production code                       | Long (An supports)                                                                             |
-| **Solution Architect**   | ADRs, repo topology, SOLID boundaries, work-breakdown plans                                    | Writing feature code, cluster ops             | Long                                                                                           |
-| **UI/UX Designer**       | Figma designs, components, mockups, design-to-code sync                                        | Writing production code, infra                | _TBD_                                                                                          |
-| **Software Engineer**    | Feature branches, code, tests, repo-level docs, PRs across L0–L3                               | Cluster ops, FluxCD, CI/CD pipeline ownership | An; Phát Phan 1 (Freelance); Phát Phan 2 (Freelance); Phát Ngô (Freelance); Khương (Freelance) |
-| **DevOps Engineer**      | `platform-fluxcd`, `platform-workflows`, k8s clusters (stg/prd), secrets, CI/CD, PR merge gate | Authoring feature code                        | Long                                                                                           |
-| **QA Engineer**          | Test planning, manual/exploratory testing, quality sign-off                                    | Merging without gate approval                 | Software Engineers cross-check                                                                 |
+| Role                     | Owns                                                                                           | Person in Charge (PiC)                                                                         |
+| ------------------------ | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **Business Stakeholder** | Originates business needs, validates outcomes, accepts features                                | Thái, Nhi                                                                                      |
+| **Product Owner**        | Prioritizes backlog, accepts specs, signs release scope                                        | Long                                                                                           |
+| **Business Analyst**     | Product specs, acceptance criteria, FRDs, issue triage                                         | Long (An supports)                                                                             |
+| **Solution Architect**   | ADRs, repo topology, SOLID boundaries, work-breakdown plans                                    | Long                                                                                           |
+| **UI/UX Designer**       | Figma designs, components, mockups, design-to-code sync                                       | _TBD_                                                                                          |
+| **Software Engineer**    | Feature branches, code, tests, repo-level docs, PRs across L0–L3                               | An; Phát Phan 1 (Freelance); Phát Phan 2 (Freelance); Phát Ngô (Freelance); Khương (Freelance) |
+| **DevOps Engineer**      | `platform-fluxcd`, `platform-workflows`, k8s clusters (stg/prd), secrets, CI/CD, PR merge gate | Long                                                                                           |
+| **QA Engineer**          | Test planning, manual/exploratory testing, quality sign-off                                    | Software Engineers cross-check                                                                 |
 
 > **Source of truth rule (non-negotiable):** the remote `main` branch of `github.com/bplatform-vn/*` is the single source of truth (SSoT). Local clones are mirrors only. If local and remote disagree, remote wins.
 
