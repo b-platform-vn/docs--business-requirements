@@ -36,6 +36,8 @@ Repos follow the **v3 naming convention** (see
 | `cfc` / `bof` (L1) | `{platform}-{product}` | `cfc-web-mdfoods`, `bof-web-bplatform`, `cfc-min-mdfoods-zalo` |
 | `api` (L2) | `service-{module\|product}` | `api-service-ecom`, `api-service-organization`, `api-service-identity` |
 | `dbo` (L3) | `{role}(?-{stack})` | `dbo-queue`, `dbo-head`, `dbo-metadata`, `dbo-worker-mssql`, `dbo-worker-mongodb` |
+
+> **DBO implementation plan**: [`technical-requirements/dbo-implementation-plan.md`](../technical-requirements/dbo-implementation-plan.md) — 13 tasks (T0–T12) with per-repo work breakdown, acceptance criteria, and a shared docker-compose E2E integration env. Assign T0 → DevOps, T1–T12 → Engineer.
 | `docs` / `sdk` (L0) | `platform` (shared) | `sdk-platform`, `docs-platform` |
 
 **L1 `platform` values:** `mob` (Mobile), `des` (Desktop), `web` (Website), `min` (MiniApp).
