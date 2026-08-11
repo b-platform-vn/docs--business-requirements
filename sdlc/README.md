@@ -3,7 +3,6 @@
 > **First version — 2026-08-11.**
 > The standard process by which the B-Platform Software Development Team turns a **Business request** into a **Running feature in Production**.
 > This document is the canonical SDLC for the `github.com/bplatform-vn` organization. It binds **people, roles, repos, and tooling** to clear **Who / What / When** ownership.
-> It describes how **humans collaborate** — no AI agent roles are included in this document.
 
 ---
 
@@ -17,7 +16,7 @@ The **Software Development Life Cycle (SDLC)** is the structured process a Softw
 - **What** artifacts, changes, and verifications must exist before moving on?
 - **When** does each step start and end, and what gate must be passed to proceed?
 
-A good SDLC is not a ceremony — it is a **delivery contract**. It makes the path from request to production predictable, auditable, and safe to automate. Product companies that scale (Google, Spotify, Shopify, Atlassian, etc.) all converge on the same canonical phases; what differs is the tooling, the team topology, and the rigor of the gates. This document adopts that canonical shape and adapts it to B-Platform's Super App kernel architecture (`L0 sdk → L1 cfc/bof → L2 api-service-* → L3 dbo-*`) and its **human development team**.
+SDLC is tool which help managing tasks is easier, more transparent, more effective. Product companies that scale (Google, Spotify, Shopify, Atlassian, etc.) all converge on the same canonical phases; what differs is the tooling, the team topology, and the rigor of the gates. This document adopts that canonical shape and adapts it to B-Platform's architecture and its **human development team**.
 
 ### 1.2 Scope
 
@@ -27,14 +26,6 @@ A good SDLC is not a ceremony — it is a **delivery contract**. It makes the pa
 | All `bplatform-vn` repos (L0–L3 + platform infra)        | Third-party SaaS administration (except where it gates a release)      |
 | Human roles and team collaboration                       | HR/people management                                                   |
 | Code, design, tests, infra, and docs artifacts           | Customer support ticket handling (covered by Operations feedback only) |
-
-### 1.3 Goals
-
-1. **Predictability** — any stakeholder can know the status and next step of a request without asking.
-2. **Quality** — no change reaches production without passing the agreed gates.
-3. **Reversibility** — every release can be rolled back safely.
-4. **Auditability** — every production change is traceable back to a Business request, a spec, a design, a PR, and an approval.
-5. **Automation** — repetitive steps (build, test, deploy, sync) are automated; humans focus on judgment.
 
 ---
 
@@ -242,7 +233,7 @@ A shared **release thread** (a Rocket.Chat channel or a pinned Multica issue com
 1. The **DevOps Engineer** deploys the build to **staging** (`k8s-dpsrv`) and posts a **staging-ready notice** in the release thread, tagging the Product Owner and (for business-visible features) the Business Stakeholder, with: the Multica issue key, what changed, how to verify, and the staging URL.
 2. **Staging verification (human collaboration):**
    - The **Product Owner** runs through the FRD acceptance criteria on staging and posts findings.
-   - The **Business Stakeholder** validates business-visible outcomes against the original request and posts confirmation or concerns.
+   - The **Business Stakeholder** (optional) validates business-visible outcomes against the original request and posts confirmation or concerns.
    - The **Software Engineer** who built the feature is on standby to answer questions or apply quick fixes if staging surfaces issues.
    - Findings are posted back to the release thread and the Multica issue. **Blockers** return the work to Phase 3; **non-blockers** are filed as new issues for a later cycle and do not block this release.
 3. **Production go/no-go:** once staging is signed off, the **Product Owner** posts an explicit **"approved for production"** decision in the release thread. For hotfixes, the DevOps Engineer may give this approval with the Product Owner informed. Production deploys are **never** automatic from a single PR merge — the human approval in the release thread is the gate.
@@ -392,4 +383,6 @@ This is **version 1** — focused on establishing the Who/What/When baseline. Ca
 - **Security & compliance gates** — formal threat-model and compliance checklist per release.
 - **Metrics & retrospectives** — measure cycle time, lead time, MTTR, and feed back quarterly.
 
-> Change log: **v1 (2026-08-11)** — initial SDLC: 6 phases, human-role RACI, master matrix, Multica issue status workflow, artifacts, and Definition of Done. Describes human collaboration only — no AI agent roles.
+> Change log: **v1 (2026-08-11)** — initial SDLC: 6 phases, human-role RACI, master matrix, Multica issue status workflow, artifacts, and Definition of Done.
+
+> 🇬🇧 **English** · [🇻🇳 Tiếng Việt](README.vi.md)
