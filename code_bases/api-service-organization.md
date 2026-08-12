@@ -2,15 +2,15 @@
 
 | | |
 |---|---|
-| **Repo** | `github.com/b-platform-vn/api-service-organization` (planned) |
+| **Repo** | `github.com/b-platform-vn/api-service-organization` |
 | **Folds** | `api-b2b-mdfoods` (B2B parts) + `api-backoffice-quotes` + `api-sale` → [old docs](./deprecated/api-service-mdfoods.md) |
 | **v3 target** | `api-service-organization` (L2) — b2b domain |
 | **Layer** | L2 — API Services |
-| **Status** | planned (fold of `api-b2b-mdfoods` B2B parts + `api-backoffice-quotes` + `api-sale`) |
-| **Language** | TBD (expected NestJS + TypeORM + TypeScript) |
+| **Status** | active (repo created 2026-08-12, NestJS scaffold — fold of `api-b2b-mdfoods` B2B parts + `api-backoffice-quotes` + `api-sale`) |
+| **Language** | NestJS 11 + TypeORM + TypeScript |
 | **Default branch** | `main` |
 
-Last synced: 2026-08-09
+Last synced: 2026-08-12
 
 ## Purpose
 
@@ -36,7 +36,7 @@ Organization (B2B) domain service. Owns the **business logic** for business-to-b
 
 ## Notes
 
-- ⚠️ This repo does **not exist** on the remote yet. Reference implementations: `api-b2b-mdfoods` (B2B parts), `api-backoffice-quotes`, `api-sale` (planned — see Super App installed apps).
+- ✅ Repo exists on the remote (`github.com/b-platform-vn/api-service-organization`, created 2026-08-12). NestJS 11 scaffold pushed. Package scope: `@b-platform-vn/api-service-organization`. Consumes `@b-platform-vn/dbo-schemas@^0.1.4` from GitHub Packages. Reference implementations: `api-b2b-mdfoods` (B2B parts), `api-backoffice-quotes`, `api-sale` (planned — see Super App installed apps).
 - B2B quote flow connects to [`api-service-ecom`](./api-service-ecom.md) for order conversion (quote-to-order).
 - The Super App lists `B-Platform Sale App` as an installed app — that UI consumes this service.
 

@@ -2,15 +2,15 @@
 
 | | |
 |---|---|
-| **Repo** | `github.com/b-platform-vn/api-service-identity` (planned) |
+| **Repo** | `github.com/b-platform-vn/api-service-identity` |
 | **Folds** | `api-auth` + `api-unigate` (planned) → [old docs](./deprecated/api-service-auth.md), [unigate](./deprecated/api-service-unigate.md) |
 | **v3 target** | `api-service-identity` (L2) — identity domain |
 | **Layer** | L2 — API Services |
-| **Status** | planned (fold of `api-auth` + `api-service-unigate`) |
-| **Language** | TBD (expected NestJS + TypeScript) |
+| **Status** | active (repo created 2026-08-12, NestJS scaffold — fold of `api-auth` + `api-service-unigate`) |
+| **Language** | NestJS 11 + TypeScript |
 | **Default branch** | `main` |
 
-Last synced: 2026-08-09
+Last synced: 2026-08-12
 
 ## Purpose
 
@@ -36,7 +36,7 @@ Identity domain service. Owns the **business logic** for authentication, SSO, an
 
 ## Notes
 
-- ⚠️ This repo does **not exist** on the remote yet. Reference implementations: `api-auth` (operator auth) + `api-service-unigate` (planned — customer SSO).
+- ✅ Repo exists on the remote (`github.com/b-platform-vn/api-service-identity`, created 2026-08-12). NestJS 11 scaffold pushed. Package scope: `@b-platform-vn/api-service-identity`. Consumes `@b-platform-vn/dbo-schemas@^0.1.4` from GitHub Packages. Reference implementations: `api-auth` (operator auth) + `api-service-unigate` (planned — customer SSO).
 - Per repo memory (`/memories/repo/unigate.md`): customer auth redirects to UniGate and returns through allowlisted callbacks; prefer an HttpOnly UniGate-domain SSO cookie plus per-product first-party sessions over a broadly shared parent-domain cookie.
 - Cross-cutting by design — auth/SSO is not e-commerce business logic, so it doesn't fold into `api-service-ecom`.
 

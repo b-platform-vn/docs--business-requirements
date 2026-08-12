@@ -2,15 +2,15 @@
 
 | | |
 |---|---|
-| **Repo** | `github.com/b-platform-vn/api-service-ecom` (planned) |
+| **Repo** | `github.com/b-platform-vn/api-service-ecom` |
 | **Folds** | `api-ecom-universal` + `api-b2cstore` + `api-product` + `api-b2b-mdfoods` (B2C parts) → [old docs](./deprecated/api-service-ecom.md) |
 | **v3 target** | `api-service-ecom` (L2) — b2c domain |
 | **Layer** | L2 — API Services |
-| **Status** | planned (fold of `api-ecom-universal` + `api-b2cstore` + `api-product` + `api-b2b-mdfoods` B2C parts) |
-| **Language** | TBD (expected NestJS + TypeORM + TypeScript) |
+| **Status** | active (repo created 2026-08-12, NestJS scaffold — fold of `api-ecom-universal` + `api-b2cstore` + `api-product` + `api-b2b-mdfoods` B2C parts) |
+| **Language** | NestJS 11 + TypeORM + TypeScript |
 | **Default branch** | `main` |
 
-Last synced: 2026-08-09
+Last synced: 2026-08-12
 
 ## Purpose
 
@@ -39,7 +39,7 @@ E-commerce (B2C) domain service. Owns the **business logic** for direct-to-consu
 
 ## Notes
 
-- ⚠️ This repo does **not exist** on the remote yet. The reference implementation is `api-ecom-universal` (largest API: ~371k TS + 210k JS + 46k TSQL).
+- ✅ Repo exists on the remote (`github.com/b-platform-vn/api-service-ecom`, created 2026-08-12). NestJS 11 scaffold pushed. Package scope: `@b-platform-vn/api-service-ecom`. Consumes `@b-platform-vn/dbo-schemas@^0.1.4` from GitHub Packages. The reference implementation is `api-ecom-universal` (largest API: ~371k TS + 210k JS + 46k TSQL).
 - **~46k TSQL migrates to [`dbo-worker-mssql`](./dbo-worker-mssql.md)** (via [`dbo-head`](./dbo-head.md)) — not to this service. This service owns the business logic that calls `dbo-head`; `dbo-head` in turn delegates to `dbo-worker-mssql`.
 - B2B parts of `api-b2b-mdfoods` (company, employee, member/permission, quote management) move to [`api-service-organization`](./api-service-organization.md), **not** here.
 - MDFoods B2C-specific features (registration, in-app messages, notification, password recovery) live here as customer-domain functions.
