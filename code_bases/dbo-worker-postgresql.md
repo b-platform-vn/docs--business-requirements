@@ -10,7 +10,7 @@
 | **Language** | NestJS 11 + TypeORM + `pg` + TypeScript |
 | **Default branch** | `main` |
 
-Last synced: 2026-08-09
+Last synced: 2026-08-12
 
 ## Purpose
 
@@ -35,7 +35,7 @@ PostgreSQL adapter for the DBO sub-layer. Executes query plans against PostgreSQ
 
 ## Notes
 
-- ⚠️ This repo does **not exist** on the remote yet. ADR: `/memories/repo/dbo-architecture.md`. Technical requirements: [`../technical-requirements/database-operation.md`](../technical-requirements/database-operation.md).
+- ✅ Repo exists on the remote (`github.com/b-platform-vn/dbo-worker-postgresql`, created 2026-08-09). Consumes `@b-platform-vn/dbo-schemas` + `@b-platform-vn/dbo-streams` — migration from `link:` to published `^0.1.4` in progress (ADR: `/memories/repo/adr-downstream-consume-published-sdk.md`). Technical requirements: [`../technical-requirements/database-operation.md`](../technical-requirements/database-operation.md) (§3, §4, §9).
 - **Conditional** — only create if the legacy `api-b2cstore` PG footprint stays. If the PG data is migrated to MSSQL (consolidating under `api-service-ecom`), this worker may never be needed. Verify the PG footprint before building.
 - A single worker instance declares **one mode per entity**; combine modes by running separate worker instances.
 

@@ -10,7 +10,7 @@
 | **Language** | NestJS 11 + TypeScript (Fastify adapter) |
 | **Default branch** | `main` |
 
-Last synced: 2026-08-09
+Last synced: 2026-08-12
 
 ## Purpose
 
@@ -37,7 +37,7 @@ The federated query planner + policy enforcement point + cluster router for the 
 
 ## Notes
 
-- ⚠️ This repo does **not exist** on the remote yet. ADR: `/memories/repo/dbo-architecture.md`. Technical requirements: [`../technical-requirements/database-operation.md`](../technical-requirements/database-operation.md).
+- ✅ Repo exists on the remote (`github.com/b-platform-vn/dbo-head`, created 2026-08-09). Consumes `@b-platform-vn/dbo-schemas` + `@b-platform-vn/dbo-streams` — migration from `link:` to published `^0.1.4` in progress (ADR: `/memories/repo/adr-downstream-consume-published-sdk.md`). Technical requirements: [`../technical-requirements/database-operation.md`](../technical-requirements/database-operation.md) (§2–§13).
 - Reliability (retry/DLQ) — the legacy `mcm-dlq-consumer` / `mcm-retry-scheduler` are retired; DBO reliability will be redesigned with the new MCM architecture.
 
 ## Owner

@@ -10,7 +10,7 @@
 | **Language** | TBD (config repo initially → runtime service with self-registration) |
 | **Default branch** | `main` |
 
-Last synced: 2026-08-09
+Last synced: 2026-08-12
 
 ## Purpose
 
@@ -34,7 +34,7 @@ Source of truth for worker → entity → **mode** → **cluster condition** →
 
 ## Notes
 
-- ⚠️ This repo does **not exist** on the remote yet. ADR: `/memories/repo/dbo-architecture.md`. Technical requirements: [`../technical-requirements/database-operation.md`](../technical-requirements/database-operation.md).
+- ✅ Repo exists on the remote (`github.com/b-platform-vn/dbo-metadata`, created 2026-08-09). Consumes `@b-platform-vn/dbo-schemas` — migration from `file:` to published `^0.1.4` in progress (ADR: `/memories/repo/adr-downstream-consume-published-sdk.md`). Technical requirements: [`../technical-requirements/database-operation.md`](../technical-requirements/database-operation.md) (§3–§5, §7).
 - MVP: static manifest deployed as a config map. Graduate to a runtime service with self-registration + heartbeat when ownership/cluster changes faster than deploy cadence.
 - If [`dbo-head`](./dbo-head.md) absorbs the registry role, this repo folds into `dbo-head`. Policy + cluster slices stay here regardless.
 
