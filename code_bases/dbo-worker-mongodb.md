@@ -10,7 +10,7 @@
 | **Language** | NestJS 11 + Mongoose 9 + TypeScript |
 | **Default branch** | `main` |
 
-Last synced: 2026-08-12
+Last synced: 2026-08-12 (post-merge)
 
 ## Purpose
 
@@ -35,7 +35,7 @@ MongoDB adapter for the DBO sub-layer. Executes query plans against MongoDB data
 
 ## Notes
 
-- ✅ Repo exists on the remote (`github.com/b-platform-vn/dbo-worker-mongodb`, created 2026-08-09). **M0 rename gap**: still uses old invalid `@b-platform-vn/sdk-platform/dbo-schemas` import paths — rename + dep swap to published `^0.1.4` in progress (ADR: `/memories/repo/adr-downstream-consume-published-sdk.md`). Technical requirements: [`../technical-requirements/database-operation.md`](../technical-requirements/database-operation.md) (§3, §4, §9).
+- ✅ Repo exists on the remote (`github.com/b-platform-vn/dbo-worker-mongodb`, created 2026-08-09). M0 rename gap fixed + consumes `@b-platform-vn/dbo-schemas@^0.1.4` + `@b-platform-vn/dbo-streams@^0.1.4` from GitHub Packages (merged PR #2, 2026-08-12). ADR: `/memories/repo/adr-downstream-consume-published-sdk.md`. Technical requirements: [`../technical-requirements/database-operation.md`](../technical-requirements/database-operation.md) (§3, §4, §9).
 - Phase 3 of the DBO rollout (multi-engine).
 - Shares schema ownership with the `mcm-schemas` subpath of [`sdk-platform`](./sdk-platform.md) (shared types) — this repo is the **operator** (runs migrations against real Mongo); the `sdk-platform/mcm-schemas` subpath is the **shared library** (types consumed in code). Don't merge them.
 - A single worker instance declares **one mode per entity**; combine modes by running separate worker instances.

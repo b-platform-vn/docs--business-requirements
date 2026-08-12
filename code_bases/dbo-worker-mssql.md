@@ -10,7 +10,7 @@
 | **Language** | NestJS 11 + TypeORM + TypeScript |
 | **Default branch** | `main` |
 
-Last synced: 2026-08-12
+Last synced: 2026-08-12 (post-merge)
 
 ## Purpose
 
@@ -35,7 +35,7 @@ MSSQL adapter for the DBO sub-layer. Executes query plans against MSSQL database
 
 ## Notes
 
-- ✅ Repo exists on the remote (`github.com/b-platform-vn/dbo-worker-mssql`, created 2026-08-09). **M0 rename gap**: still uses old invalid `@b-platform-vn/sdk-platform/dbo-schemas` import paths — rename + dep swap to published `^0.1.4` in progress (ADR: `/memories/repo/adr-downstream-consume-published-sdk.md`). Technical requirements: [`../technical-requirements/database-operation.md`](../technical-requirements/database-operation.md) (§3, §4, §9).
+- ✅ Repo exists on the remote (`github.com/b-platform-vn/dbo-worker-mssql`, created 2026-08-09). M0 rename gap fixed + consumes `@b-platform-vn/dbo-schemas@^0.1.4` + `@b-platform-vn/dbo-streams@^0.1.4` from GitHub Packages (merged PR #2, 2026-08-12). ADR: `/memories/repo/adr-downstream-consume-published-sdk.md`. Technical requirements: [`../technical-requirements/database-operation.md`](../technical-requirements/database-operation.md) (§3, §4, §9).
 - Phase 1 MVP target — migrate one entity from `api-service-ecom` as the pilot.
 - Phase 0 (contracts) must land first: `sdk-platform/dbo-schemas` defines the Query Plan DTO + `EntityModeDeclaration` this worker registers.
 - A single worker instance declares **one mode per entity**; combine modes by running separate worker instances.
