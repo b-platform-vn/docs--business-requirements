@@ -40,6 +40,7 @@ Inter-service orchestration domain service. Owns the **mediation layer** between
 ## Notes
 
 - ✅ Repo exists on the remote (`github.com/b-platform-vn/api-service-orchestrator`, created 2026-08-12). NestJS 11 scaffold pushed (commit `4e014a4`). Package scope: `@b-platform-vn/api-service-orchestrator`. Consumes `@b-platform-vn/dbo-schemas@^0.1.4` from GitHub Packages.
+- ⚠️ Contract drift: remote `bof-web-bplatform/main` currently documents and implements an L1 portal BFF skeleton that calls this service (`apps/portal/src/server/orchestrator-client.ts`), while this repo's architecture contract says it is L2-internal and not consumed by L1. This must be resolved by an ADR before either boundary is treated as the ecosystem-wide rule; declarative UI/action payloads must never choose the service route themselves.
 - **Why a service, not a library**: routing + response-pattern negotiation + audit must be a single authoritative boundary, not duplicated into every caller via an SDK. An SDK would let callers bypass the orchestrator under pressure.
 - **Why L2, not L0**: it owns business-adjacent state (request lifecycle, DLQ), consumes `dbo-head`, and is consumed only by other L2 services — same layer as the domains it mediates.
 - **Local-dev escape hatch**: in local dev, servers can't call back to each other; the synchronous pattern is the default there. In production, default to short/long polling unless the op is provably <1s (e.g. auth checks).

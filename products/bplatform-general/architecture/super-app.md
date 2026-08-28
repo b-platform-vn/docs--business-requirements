@@ -255,7 +255,37 @@ Permission matching requirements:
 - [P0] If a permission expression cannot be parsed, the Super App must deny access by default.
 - [P0] Apps must not invent ad-hoc permission syntax outside this convention without updating this architecture contract.
 
-Permission definition examples:
+### Authorization engine
+
+The Portal server enforces this convention using [`accesscontrol`](https://github.com/onury/accesscontrol) v3. The permission-expression syntax (`app.module.action(param:value)`) is the human-readable contract; `accesscontrol` is the evaluation engine underneath. See the [accesscontrol ADR](./decisions/accesscontrol-authorization.md) for the full mapping.
+
+Mapping:
+
+| Convention concept | `accesscontrol` concept |
+|---|---|
+| `app.module.action` | Custom action `.action(action, resource)` / `.do(action, resource)`. |
+| `app` / `module` | Group/category (`crm/communication`) with bounded bulk grants. |
+| `param:value` scoped parameters | `.where()` conditions over request context; scoped values are condition context, not separate roles. |
+| `param:*` wildcard | Condition omitting that parameter. |
+| `param:!value` negation | `.where('$.param != "value"')` or `.deny()` carve-out. |
+| Multiple values = OR | `$.param in ["a","b"]`. |
+| Multiple parameters = AND | Logical `and` in one `.where()`. |
+| Deny always wins | `accesscontrol` deny-overrides. |
+| `own` vs `any` | Enforced possession with a configured ownership resolver. |
+| Response field stripping | `perm.filter(record)` with glob attribute grants. |
+
+Authorization requirements:
+
+- [P0] Every server action and route handler must call `tryCan` before executing. A thrown error must never become an accidental allow.
+- [P0] Roles represent job functions (root, admin, operator, viewer); scoped parameters are ABAC conditions evaluated at check time, not separate roles.
+- [P0] `own` possession must be enforced with a real ownership resolver against the resource record, not just attribute-set selection.
+- [P0] Handlers must call `perm.filter()` on read results so only granted fields are returned.
+- [P0] Grants must be serializable to MSSQL rows via `getGrantsList()` and reloadable via `new AccessControl(rows)`; `snapshot()`/`restore()` round-trips the whole model.
+- [P0] The `access` event stream must feed the bounded audit records defined in the Portal A2UI runtime.
+- [P0] Gates (`.require()`) enforce cross-cutting restrictions (production-only, MFA-gated, network-zone); they only restrict.
+- [P0] Custom async conditions (`defineCondition`) support business checks (IP allowlist, tenant membership) that resolve against MSSQL.
+
+### Permission definition examples
 
 ```ts
 const crmConversationNavigation: NavigationDefinition = {
@@ -519,6 +549,48 @@ Browser-side code is responsible for:
 - Raising user actions to the Super App.
 - Never storing internal service secrets.
 - Never calling internal API services directly.
+
+## Server-authoritative Declarative UI
+
+The Super App may render server-produced declarative surfaces with json-render concepts and the official **A2UI v0.9.1** production protocol. A2UI is a portal-wide kernel/runtime capability for every adopting feature and installed app; login and first-run initialization are the first vertical slice, not a separate authentication runtime. This extends the existing kernel/server-action boundary; it does not move installed-app business logic into the browser.
+
+The normative Redis, session, catalog, widget-state, action, routing, and reconnect contracts are defined in [`technical-requirements/portal-a2ui-runtime.md`](../../../technical-requirements/portal-a2ui-runtime.md). Feature plans add cohesive widgets, typed actions, capabilities, permissions, and product tests without redefining the runtime.
+
+**Server-directed routing.** Navigation changes are server-directed, not browser-composed. The Portal kernel signals the client to enter a route — e.g. the stored return target after sign-in — the client applies the route change and posts a **route-change acknowledgement action**, and a server-owned **route surface resolver** creates the surface for that route. The browser never invents, selects, or deletes/recreates routes itself. Authenticated transitions use this **redirect / re-route signal** rather than a same-stream `deleteSurface` + `createSurface` pair; the return target lives only in server-owned session state, never in the bootstrap JSON, URLs, or client-readable bodies.
+
+Protocol requirements:
+
+- [P0] A2UI v0.9.1 is the production baseline. A2UI v1.0 remains candidate-only until an approved ADR changes the baseline.
+- [P0] json-render's native SpecStream (JSONL RFC 6902 patches for the json-render spec) must not be described as A2UI. An A2UI implementation must validate official A2UI messages and catalog contracts through an explicit adapter/renderer.
+- [P0] The Portal kernel must provide one shared A2UI session, surface, reducer, action-ingress, SSE, and isolation runtime for all adopting features. Feature packages must not create parallel protocols or session stores.
+- [P0] On first bootstrap, the Portal must create an opaque Redis-backed A2UI conversation/session and store its identifier only in an `HttpOnly`, `Secure`, SameSite cookie. The A2UI session is distinct from the authenticated Portal session.
+- [P0] The server streams validated `createSurface`, `updateComponents`, `updateDataModel`, and `deleteSurface` messages over ordered, resumable SSE.
+- [P0] Navigation changes are server-directed. The kernel signals the client to enter a route (stored return target or post-auth default) via a **redirect / re-route signal**, the client applies the route change and posts a **route-change acknowledgement action**, and a server-owned **route surface resolver** creates the surface for that route. The browser never invents, selects, or deletes/recreates routes, and no same-stream `deleteSurface` + `createSurface` pair is used for the authenticated transition.
+- [P0] The return target is captured by the server at bootstrap into A2UI session context and resolved server-side after authentication; the browser cannot choose a return URL, and the target never appears in the bootstrap JSON, URLs, or client-readable bodies.
+- [P0] Reconnect must load the cookie-bound conversation from Redis and use `Last-Event-ID` only as a surface-scoped cursor; it must resume contiguous retained events or replace state with a credential-free authoritative snapshot.
+- [P0] The browser sends validated A2UI `action` or `error` messages to a same-origin Super App route handler/server action; the browser never calls an internal API service directly.
+- [P0] A generated surface may use only versioned cohesive workflow widgets, props, bindings, actions, and functions mapped to reviewed native implementations. Atomic controls such as inputs, buttons, typography, and layout primitives remain `shared-ui` implementation details and are not independently generatable catalog entries.
+- [P0] Catalog widget implementations must be controlled, context-free views: no inner component state, React context, A2UI/json-render hooks, domain fetches, persistence, or business handlers. The renderer host injects validated values and typed callbacks.
+- [P0] Generated UI data must never contain executable JavaScript/JSX, arbitrary imports, raw scripts, event-handler source, arbitrary API URLs, or unreviewed HTML/CSS execution paths.
+
+Action execution requirements:
+
+- [P0] Local browser behavior is limited to rendering, renderer-owned input/presentation state, and UX validation. Server surface state, local presentation state, and local secret state must be separate typed stores with explicit serialization barriers. Authentication, authorization, integrity validation, business rules, persistence, and side effects execute on the server.
+- [P0] Secret input state is never written to Redis, A2UI data models, SSE, snapshots, browser storage, logs, traces, metrics, audit details, queues, or idempotency records. Password-bearing actions are explicit and are never automatically replayed.
+- [P0] Every domain action name resolves through an allowlisted server action registry and the kernel's approved server-side service boundary. A UI payload must never select an import, handler, provider, or endpoint URL.
+- [P0] The server treats action context and synchronized data models as untrusted input, validates them against the action schema, re-fetches authoritative domain state, recomputes permissions/transitions, and denies by default.
+- [P0] UI visibility, disabled state, and client-side permission checks are UX only and must never authorize an action.
+- [P0] Side-effecting actions require idempotency/replay protection and audit metadata including tenant, principal, surface, source component, action, target capability, correlation ID, and outcome.
+
+Surface isolation requirements:
+
+- [P0] The server binds each `surfaceId` to its tenant/principal, cookie-bound A2UI session, owning agent/domain, catalog version, and current revision in Redis.
+- [P0] Actions and errors route only to the authoritative owner of their surface; the client must not choose or override the owner.
+- [P0] Surfaces whose authorization scope changed after a server-directed route change are deleted or revalidated as a consequence of the route change; the browser never triggers a `deleteSurface`/`createSurface` pair to navigate, and a route-change acknowledgement carries no target choice, role, credentials, or return URL.
+- [P0] Before context/data is forwarded to another agent/domain, the server strips every data model and metadata entry belonging to surfaces that target does not own.
+- [P0] The client validates messages before applying them, rejects stale/duplicate revisions, and safely handles unknown catalog content.
+- [P0] Stream reconnect must resume from a known event/revision or replace client state with a fresh authoritative surface snapshot.
+- [P0] Redis outage must fail closed with a safe unavailable experience; process-local state is test-only and cannot become production authority.
 
 ## Failure Handling
 
