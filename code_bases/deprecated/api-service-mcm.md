@@ -14,11 +14,11 @@ Last synced: 2026-08-09
 
 ## Purpose
 
-MCM (Multi-Channel Messaging) domain service — the **omni-channel router** (message routing / fan-out) and the **internal-channel connector** (internal delivery & persistence). Corresponds to `packages/omni-channel/` (port 3001) + `packages/internal-channel/` (port 3002) in the legacy [`app-mcm`](./deprecated/app-mcm.md) monorepo. Distinct from [`api-service-integration`](./api-service-integration.md), which owns the 3rd-party channel connectors — this service routes messages between internal destinations.
+MCM (Multi-Channel Messaging) domain service — the **omni-channel router** (message routing / fan-out) and the **internal-channel connector** (internal delivery & persistence). Corresponds to `packages/omni-channel/` (port 3001) + `packages/internal-channel/` (port 3002) in the legacy [`app-mcm`](./deprecated/app-mcm.md) monorepo. Distinct from the channel connector services (`api-service-zalo`, `api-service-facebook`, `api-service-email`, `api-service-whatsapp`), which own 3rd-party transport — this service routes messages between internal destinations.
 
 ## Responsibility
 
-- **Route inbound messages** from connectors (received via [`api-service-integration`](./api-service-integration.md)) to the right destination.
+- **Route inbound messages** from connectors (received via the dedicated connector services) to the right destination.
 - **Fan-out messages** across multiple channels.
 - **Internal-channel message delivery & persistence**.
 - Reliability (DLQ/retry) — design TBD as part of the new MCM architecture (legacy `mcm-dlq-consumer` / `mcm-retry-scheduler` retired, not carried forward).
@@ -27,7 +27,7 @@ MCM (Multi-Channel Messaging) domain service — the **omni-channel router** (me
 
 - **Runtime**: `@nestjs/*` (common, config, core, jwt, microservices, mongoose, passport, platform-express, typeorm), `amqplib`, `axios`, `mongodb`, `mongoose`, `mssql`, `passport-jwt`, `uuid`, `reflect-metadata`, `tslib`, `typeorm`, `redis`.
 - **B-Platform SDKs (L0)**: [`sdk-platform`](./sdk-platform.md) subpaths — `@b-platform-vn/sdk-platform/mcm-common`, `…/mcm-schemas`, `…/mcm-streams`.
-- **Upstream**: [`api-service-integration`](./api-service-integration.md) (connectors push inbound messages here via Redis Streams).
+- **Upstream**: dedicated connector services (they push inbound messages here via Redis Streams).
 - **Message broker**: RabbitMQ, Redis (streams).
 - **Database Operator (L3)**: [`dbo-head`](./dbo-head.md) — synchronous request/response for all datastore access (MongoDB, MSSQL). This service does **not** touch the datastore directly.
 - **Auth**: `passport-jwt`, consumes [`api-service-identity`](./api-service-identity.md).

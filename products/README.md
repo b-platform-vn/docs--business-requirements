@@ -62,6 +62,7 @@ graph TD
 | [B-Platform / General](/products/bplatform-general/) | Global UX, Shared Navigation & Platform Functions | Shared global navigation, global search, app shell behavior, and reusable cross-product UX requirements. |
 | [B-Platform / UniGate](/products/bplatform-unigate/) | UniGate Administration, Identity & Authorization | Management side of UniGate for applications, users, roles, permissions, customer accounts, product access, and audit workflows. |
 | [Customer Relationship Management (CRM)](/products/crm/) | Customer Management, Communication & Support | Unified platform for managing customers, communicating across all channels, and handling customer support. |
+| [B-Platform / Rocket Agents](/products/bplatform-rocket-agents/) | AI Assistant Operations | Internal AI assistant workspace for tasks, system queries, and media generation. |
 
 ## Customer-facing
 

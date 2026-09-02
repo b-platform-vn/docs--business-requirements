@@ -25,7 +25,7 @@ Inter-service orchestration domain service. Owns the **mediation layer** between
 
 ## Dependencies
 
-- **Callers (L2, all of them)**: every `api-service-*` ([`api-service-ecom`](./api-service-ecom.md), [`api-service-organization`](./api-service-organization.md), [`api-service-social`](./api-service-social.md), [`api-service-integration`](./api-service-integration.md), [`api-service-crm`](./api-service-crm.md), [`api-service-identity`](./api-service-identity.md), [`api-service-content`](./api-service-content.md)) saves cross-domain requests here instead of calling peers directly.
+- **Callers (L2, all of them)**: every `api-service-*` ([`api-service-ecom`](./api-service-ecom.md), [`api-service-organization`](./api-service-organization.md), [`api-service-social`](./api-service-social.md), [`api-service-crm`](./api-service-crm.md), [`api-service-identity`](./api-service-identity.md), [`api-service-content`](./api-service-content.md), [`api-service-zalo`](./api-service-zalo.md), [`api-service-facebook`](./api-service-facebook.md), [`api-service-email`](./api-service-email.md), [`api-service-whatsapp`](./api-service-whatsapp.md)) saves cross-domain requests here instead of calling peers directly.
 - **Targets (L2, all of them)**: dispatches to whichever L2 service the request names as target. The orchestrator does **not** know target business logic — it only routes.
 - **Database Operator (L3)**: [`dbo-head`](./dbo-head.md) — synchronous request/response for persisting request records, audit logs, and DLQ entries. This service does **not** touch the datastore directly.
 - **Not consumed by L1**: L1 (cfc/bof) calls business domains directly, never the orchestrator. The orchestrator is L2-internal.

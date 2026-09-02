@@ -26,7 +26,7 @@ Customer-messaging web app for the MCM (Multi-Channel Messaging) platform. Offli
 
 - **Runtime**: `next`, `react`, `react-dom`, `rxdb`, `y-dexie`, `dexie`, `dexie-react-hooks`, `pouchdb-adapter-http`, `pouchdb-adapter-idb`, `@microsoft/fetch-event-source`, `react-hot-toast`, `react-infinite-scroll-component`.
 - **B-Platform SDKs (L0)**: [`sdk-platform`](./sdk-platform.md) subpaths — `@b-platform-vn/sdk-platform/mcm-common`, `…/mcm-schemas`.
-- **Backend (L2)**: CRM communication APIs — [`api-service-crm`](./api-service-crm.md) (router) + [`api-service-integration`](./api-service-integration.md) (connectors).
+- **Backend (L2)**: CRM communication APIs — [`api-service-crm`](./api-service-crm.md) (router) + connector services (`api-service-zalo`, `api-service-facebook`, `api-service-email`, `api-service-whatsapp`).
 - **Build**: SWC (`.swcrc`); E2E tests in `e2e/`.
 
 ## Public API surface

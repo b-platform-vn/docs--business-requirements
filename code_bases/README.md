@@ -5,7 +5,7 @@
 > summarizes each repo's purpose, layer, and key dependencies. Per-repo detail lives
 > in `code_bases/<repo>.md`.
 
-Last synced: 2026-08-09
+Last synced: 2026-09-02
 
 ## Architecture layers
 
@@ -52,6 +52,12 @@ flowchart TD
   subgraph L2["L2 — API Services (api)"]
     API["api-service-{module|product}<br/>business domain logic"]
     ORCH["api-service-orchestrator<br/>L2 service — mediates all inter-service calls"]
+    AGENT["api-service-agent<br/>AI / agent domain"]
+    ROCKET["api-service-rocket<br/>Rocket.Chat integration"]
+    ZALO["api-service-zalo<br/>Zalo integration"]
+    FACEBOOK["api-service-facebook<br/>Facebook integration"]
+    EMAIL["api-service-email<br/>Email integration"]
+    WHATSAPP["api-service-whatsapp<br/>WhatsApp integration"]
   end
   subgraph L3["L3 — Database Operators (dbo)"]
     HEAD["dbo-head<br/>planner/consolidator"]
@@ -65,13 +71,34 @@ flowchart TD
     SDK["sdk-* / sdk-platform<br/>@b-platform-vn/*"]
     DOCS["docs-* / docs-platform"]
   end
+  subgraph EXT["External systems"]
+    RCHAT["Rocket.Chat<br/>rocket.b-platform.vn"]
+    ZALOAPI["Zalo Personal / OA APIs"]
+    FACEBOOKAPI["Facebook Page APIs"]
+    EMAILAPI["Email / SMTP / IMAP"]
+    WHATSAPPAPI["WhatsApp Business APIs"]
+  end
 
   CFC -->|server actions / BFF| API
   BOF -->|server actions / BFF| API
   API -->|save request| ORCH
+  AGENT -->|save request| ORCH
   ORCH -->|dispatch| API
+  ORCH -->|dispatch| AGENT
+  ORCH -->|dispatch| ROCKET
+  ORCH -->|dispatch| ZALO
+  ORCH -->|dispatch| FACEBOOK
+  ORCH -->|dispatch| EMAIL
+  ORCH -->|dispatch| WHATSAPP
+  ROCKET --> RCHAT
+  ZALO --> ZALOAPI
+  FACEBOOK --> FACEBOOKAPI
+  EMAIL --> EMAILAPI
+  WHATSAPP --> WHATSAPPAPI
   API -->|query plan| HEAD
+  AGENT -->|query plan| HEAD
   API -->|enqueue| Q
+  AGENT -->|enqueue| Q
   Q --> HEAD
   HEAD -->|entity ownership?| META
   META -.entity/mode.-> HEAD
@@ -79,7 +106,9 @@ flowchart TD
   HEAD --> W2
   HEAD --> W3
   API -.consumes.-> SDK
+  AGENT -.consumes.-> SDK
   ORCH -.consumes.-> SDK
+  ROCKET -.consumes.-> SDK
   HEAD -.consumes.-> SDK
   W1 -.consumes.-> SDK
   W2 -.consumes.-> SDK
@@ -89,9 +118,16 @@ flowchart TD
   style L2 fill:#34a853,color:#fff
   style L3 fill:#fbbc04,color:#000
   style L0 fill:#9aa0a6,color:#fff
+  style EXT fill:#455A64,color:#fff
 ```
 
 **Dependency direction (strict, one-way):** L1 → L2 → L3. L2 may not call L1; L3 may not call L2. **L2 services never call each other directly** — they save requests to the **Service Orchestrator**, which dispatches to the target service. L2 calls `dbo-head` synchronously (request/response) for all datastore access, or enqueues to `dbo-queue` for async bulk ops — **never** touches `dbo-worker-*` directly. L0 (`sdk-*`/`docs-*`) is consumed by all layers but depends on nothing upstream.
+
+**L2 service boundaries:**
+
+- `api-service-agent` owns AI orchestration, tool execution, and agent memory/state.
+- `api-service-rocket` owns Rocket.Chat transport, bots, webhooks, and message delivery.
+- AI-generated Rocket.Chat messages flow `api-service-agent` → Service Orchestrator → `api-service-rocket`; no direct service-to-service call.
 
 ### Response delivery from the orchestrator
 
@@ -135,7 +171,12 @@ Business logic is grouped by domain, not by product or channel. Each domain serv
 | [`api-service-ecom`](./api-service-ecom.md) | planned (fold of `api-ecom-universal` + `api-b2cstore` + `api-product` + `api-b2b-mdfoods` B2C parts) | e-commerce (B2C) | Customer, Products, Product Categories, Order, Delivery | [→](./api-service-ecom.md) |
 | [`api-service-organization`](./api-service-organization.md) | planned (fold of `api-b2b-mdfoods` B2B parts + `api-backoffice-quotes` + `api-sale`) | organization (B2B) | Employee, Company, Member/Permission, Quote, Sales pipeline | [→](./api-service-organization.md) |
 | [`api-service-social`](./api-service-social.md) | planned (new) | social | Articles, Posts, Comments | [→](./api-service-social.md) |
-| [`api-service-integration`](./api-service-integration.md) | planned (fold of `api-mcm-connector-zalo` + FB/WA integrations) | integrations | 3rd-party connectors (Zalo, Facebook, WhatsApp) | [→](./api-service-integration.md) |
+| [`api-service-agent`](./api-service-agent.md) | planned (new) | ai agent | AI assistants, prompt orchestration, tool execution, conversation state | [→](./api-service-agent.md) |
+| [`api-service-rocket`](./api-service-rocket.md) | planned (new) | rocket integration | Rocket.Chat messaging, bots, webhooks, delivery tracking | [→](./api-service-rocket.md) |
+| [`api-service-zalo`](./api-service-zalo.md) | planned (new) | zalo integration | Zalo Personal Account and Official Account messaging | [→](./api-service-zalo.md) |
+| [`api-service-facebook`](./api-service-facebook.md) | planned (new) | facebook integration | Facebook Page messaging and webhooks | [→](./api-service-facebook.md) |
+| [`api-service-email`](./api-service-email.md) | planned (new) | email integration | Email messaging, inbound mailbox sync, delivery audit | [→](./api-service-email.md) |
+| [`api-service-whatsapp`](./api-service-whatsapp.md) | planned (new) | whatsapp integration | WhatsApp Business messaging, inbound webhooks, delivery audit | [→](./api-service-whatsapp.md) |
 | [`api-service-crm`](./api-service-crm.md) | planned (new; absorbs `api-service-mcm`) | crm | Customer relationship management, communication (MCM omni-channel router, DLQ/retry) | [→](./api-service-crm.md) |
 | [`api-service-content`](./api-service-content.md) | planned (rename of `api-b2c-content`; absorbs `api-service-file`) | content | Storefront content (Strapi), media/file management | [→](./api-service-content.md) |
 | [`api-service-orchestrator`](./api-service-orchestrator.md) | planned (new) | orchestration | Cross-service request routing, response delivery (sync / short-poll / long-poll), DLQ | [→](./api-service-orchestrator.md) |
@@ -143,7 +184,10 @@ Business logic is grouped by domain, not by product or channel. Each domain serv
 **Domain boundary rules:**
 
 - `api-service-ecom` (B2C) ↔ `api-service-organization` (B2B): quote-to-order handoff goes B2B→B2C — routed through the orchestrator, not a direct call.
-- `api-service-crm` → `api-service-integration`: CRM requests outbound sends (Email, Zalo, FB, WhatsApp, ZNS) via the orchestrator; integration persists inbound messages to the DB and CRM reads them back via `dbo-head`. DLQ/retry stays with CRM.
+- `api-service-agent` is cross-cutting AI capability — assistant workflows, prompt orchestration, and tool execution are exposed as a domain service, not a UI helper.
+- `api-service-rocket` is the Rocket.Chat integration boundary — all channel sends, bot replies, and webhooks stay here.
+- `api-service-agent` → `api-service-rocket`: AI-generated messages and bot actions flow through the orchestrator, not direct service-to-service calls.
+- `api-service-crm` → `api-service-zalo`, `api-service-facebook`, `api-service-email`, `api-service-whatsapp`: CRM requests outbound sends (Email, Zalo Personal/OA, Facebook Page, WhatsApp) via the orchestrator; connectors persist inbound messages to the DB and CRM reads them back via `dbo-head`. DLQ/retry stays with CRM.
 - `api-service-identity` is cross-cutting — consumed by all business domains (via orchestrator).
 - `api-service-content` absorbs file/media management — media files are content, not a separate cross-cutting domain. Consumed by all business domains for content/media (via orchestrator).
 - MCM is a communication sub-domain of CRM, not a separate service.
@@ -188,7 +232,7 @@ Business logic is grouped by domain, not by product or channel. Each domain serv
 | [`deprecated`](./deprecated/deprecated.md) | retire | Legacy monorepo (old DongPhat, LFarm, OnWork, B-Platform, C# APIs) | [→](./deprecated/deprecated.md) |
 | [`aa`](./deprecated/aa.md) | retire | Empty placeholder repo | [→](./deprecated/aa.md) |
 | [`api-agent-ui`](./deprecated/api-agent-ui.md) | retire | Empty placeholder repo | [→](./deprecated/api-agent-ui.md) |
-| [`app-mcm`](./deprecated/app-mcm.md) | retire after extraction | Nx monorepo; packages map to `cfc-web-mcm` + `api-service-crm` (communication) + `api-service-integration` + `sdk-platform/mcm-schemas` | [→](./deprecated/app-mcm.md) |
+| [`app-mcm`](./deprecated/app-mcm.md) | retire after extraction | Nx monorepo; packages map to `cfc-web-mcm` + `api-service-crm` (communication) + `api-service-zalo` + `api-service-facebook` + `api-service-email` + `api-service-whatsapp` + `sdk-platform/mcm-schemas` | [→](./deprecated/app-mcm.md) |
 | [`web-static-files`](./deprecated/web-static-files.md) | retire | Nginx static hosting for Zalo verification — replaced by DNS-based verification | [→](./deprecated/web-static-files.md) |
 | [`mcm-dlq-consumer`](./deprecated/mcm-dlq-consumer.md) | retire | MCM dead-letter queue consumer — MCM solution to be reworked; DBO reliability designed with new MCM architecture | [→](./deprecated/mcm-dlq-consumer.md) |
 | [`mcm-retry-scheduler`](./deprecated/mcm-retry-scheduler.md) | retire | MCM retry scheduler — MCM solution to be reworked; DBO reliability designed with new MCM architecture | [→](./deprecated/mcm-retry-scheduler.md) |

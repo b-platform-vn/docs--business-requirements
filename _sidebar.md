@@ -13,6 +13,10 @@
     - [Application Management](products/bplatform-unigate/features/01-application-management.md)
     - [User Management](products/bplatform-unigate/features/02-user-management.md)
   - [CRM](products/crm/README.md)
+    - [Customers](products/crm/features/01-customers.md)
+    - [Communications](products/crm/features/02-communications.md)
+  - [B-Platform / Rocket Agents](products/bplatform-rocket-agents/README.md)
+    - [Customer Pool Generating](products/bplatform-rocket-agents/features/01-customer-pool-generating.md)
 - **Customer-facing**
   - MDFoods
     - [Overview](products/mdfoods/README.md)
@@ -59,9 +63,14 @@
     - [api-service-ecom](code_bases/api-service-ecom.md)
     - [api-service-organization](code_bases/api-service-organization.md)
     - [api-service-crm](code_bases/api-service-crm.md)
-    - [api-service-integration](code_bases/api-service-integration.md)
     - [api-service-content](code_bases/api-service-content.md)
     - [api-service-social](code_bases/api-service-social.md)
+    - [api-service-agent](code_bases/api-service-agent.md)
+    - [api-service-rocket](code_bases/api-service-rocket.md)
+    - [api-service-zalo](code_bases/api-service-zalo.md)
+    - [api-service-facebook](code_bases/api-service-facebook.md)
+    - [api-service-email](code_bases/api-service-email.md)
+    - [api-service-whatsapp](code_bases/api-service-whatsapp.md)
   - L3 — Database Operators
     - [dbo-queue](code_bases/dbo-queue.md)
     - [dbo-head](code_bases/dbo-head.md)
