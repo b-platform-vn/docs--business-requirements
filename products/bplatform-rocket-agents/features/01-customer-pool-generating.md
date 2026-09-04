@@ -106,6 +106,7 @@ The feature should support a daily or scheduled agent run that:
 ## Cross-links
 
 - CRM destination: [CRM / Customers](/products/crm/features/01-customers.md)
+- Technical solution: [Customer Pool Generating - Technical Solution](./01-customer-pool-generating-technical-solution.md)
 
 ## Interaction Flow
 
