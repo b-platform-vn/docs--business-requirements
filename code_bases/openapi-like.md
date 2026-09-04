@@ -1,17 +1,17 @@
-# api-service-orchestrator
+# OpenAPI Like
 
 | | |
 |---|---|
-| **Component** | `api-service-orchestrator` |
+| **Component** | `OpenAPI Like` |
 | **Category** | API application |
-| **Technology / channel** | Node.js |
+| **Technology / channel** | OmniRoute |
 | **Status** | **Ready to use / Published** |
-| **Ownership** | Phat 1, Phat Ngo (Part-time) |
+| **Ownership** | Long |
 | **Architecture source** | [`component-design.excalidraw`](../diagrams/component-design.excalidraw) |
 
 ## Purpose
 
-Orchestrates requests between API services.
+OmniRoute OpenAPI-compatible component.
 
 ## Status interpretation
 

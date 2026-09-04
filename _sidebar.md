@@ -47,38 +47,33 @@
   - [LFarm](products/lfarm/README.md)
 - **Code Bases**
   - [Overview](code_bases/README.md)
-  - L0 — Shared & Docs
-    - [sdk-platform](code_bases/sdk-platform.md)
-    - [docs-platform](code_bases/docs-platform.md)
-  - L1 — User Interaction
-    - [bof-web-bplatform](code_bases/bof-web-bplatform.md)
-    - [cfc-web-mdfoods](code_bases/cfc-web-mdfoods.md)
-    - [cfc-web-asfoods](code_bases/cfc-web-asfoods.md)
-    - [cfc-web-di5](code_bases/cfc-web-di5.md)
-    - [cfc-web-lfarm](code_bases/cfc-web-lfarm.md)
-    - [cfc-web-mcm](code_bases/cfc-web-mcm.md)
-  - L2 — API Services
+  - Web applications
+    - [rocket.b-plarform.vn](code_bases/rocket-bplatform.md)
+    - [portal.b-plarform.vn](code_bases/bof-web-bplatform.md)
+    - [mdfoods.vn](code_bases/cfc-web-mdfoods.md)
+    - [odeli.vn](code_bases/cfc-web-odeli.md)
+    - [lfarm.vn](code_bases/cfc-web-lfarm.md)
+    - [di5.vn](code_bases/cfc-web-di5.md)
+    - [asfoods.vn](code_bases/cfc-web-asfoods.md)
+  - Partner applications
+    - [Bep Di 5](code_bases/cfc-min-di5-zalo.md)
+  - API applications
     - [api-service-orchestrator](code_bases/api-service-orchestrator.md)
     - [api-service-identity](code_bases/api-service-identity.md)
     - [api-service-ecom](code_bases/api-service-ecom.md)
     - [api-service-organization](code_bases/api-service-organization.md)
     - [api-service-crm](code_bases/api-service-crm.md)
     - [api-service-content](code_bases/api-service-content.md)
-    - [api-service-social](code_bases/api-service-social.md)
     - [api-service-agent](code_bases/api-service-agent.md)
     - [api-service-rocket](code_bases/api-service-rocket.md)
     - [api-service-zalo](code_bases/api-service-zalo.md)
     - [api-service-facebook](code_bases/api-service-facebook.md)
     - [api-service-email](code_bases/api-service-email.md)
-    - [api-service-whatsapp](code_bases/api-service-whatsapp.md)
-  - L3 — Database Operators
     - [dbo-queue](code_bases/dbo-queue.md)
     - [dbo-head](code_bases/dbo-head.md)
     - [dbo-metadata](code_bases/dbo-metadata.md)
-    - [dbo-worker-mssql](code_bases/dbo-worker-mssql.md)
-    - [dbo-worker-mongodb](code_bases/dbo-worker-mongodb.md)
-    - [dbo-worker-postgresql](code_bases/dbo-worker-postgresql.md)
-  - Platform Infra
-    - [platform-fluxcd](code_bases/platform-fluxcd.md)
-    - [platform-workflows](code_bases/platform-workflows.md)
-  - [Deprecated](code_bases/deprecated/deprecated.md)
+    - [dbo-mssql-worker](code_bases/dbo-mssql-worker.md)
+    - [OpenAPI Like](code_bases/openapi-like.md)
+  - Legacy
+    - [Legacy Applications](code_bases/legacy-applications.md)
+    - [DB-MIS](code_bases/db-mis.md)

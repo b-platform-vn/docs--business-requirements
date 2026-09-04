@@ -1,17 +1,17 @@
-# api-service-facebook
+# odeli.vn
 
 | | |
 |---|---|
-| **Component** | `api-service-facebook` |
-| **Category** | API application |
-| **Technology / channel** | Node.js |
+| **Component** | `odeli.vn` |
+| **Category** | Web application |
+| **Technology / channel** | Web |
 | **Status** | **In Development** |
-| **Ownership** | Phat 1, Phat Ngo (Part-time) |
+| **Ownership** | An, Phat 1 |
 | **Architecture source** | [`component-design.excalidraw`](../diagrams/component-design.excalidraw) |
 
 ## Purpose
 
-Facebook integration service.
+Odeli customer-facing website.
 
 ## Status interpretation
 

@@ -1,17 +1,17 @@
-# api-service-facebook
+# Bep Di 5
 
 | | |
 |---|---|
-| **Component** | `api-service-facebook` |
-| **Category** | API application |
-| **Technology / channel** | Node.js |
+| **Component** | `Bep Di 5` |
+| **Category** | Partner application |
+| **Technology / channel** | Zalo Mini App |
 | **Status** | **In Development** |
-| **Ownership** | Phat 1, Phat Ngo (Part-time) |
+| **Ownership** | Long |
 | **Architecture source** | [`component-design.excalidraw`](../diagrams/component-design.excalidraw) |
 
 ## Purpose
 
-Facebook integration service.
+Bếp Dì 5 customer experience delivered as a Zalo Mini App.
 
 ## Status interpretation
 

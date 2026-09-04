@@ -1,17 +1,17 @@
-# api-service-orchestrator
+# rocket.b-plarform.vn
 
 | | |
 |---|---|
-| **Component** | `api-service-orchestrator` |
-| **Category** | API application |
-| **Technology / channel** | Node.js |
+| **Component** | `rocket.b-plarform.vn` |
+| **Category** | Web application |
+| **Technology / channel** | Web |
 | **Status** | **Ready to use / Published** |
-| **Ownership** | Phat 1, Phat Ngo (Part-time) |
+| **Ownership** | Long |
 | **Architecture source** | [`component-design.excalidraw`](../diagrams/component-design.excalidraw) |
 
 ## Purpose
 
-Orchestrates requests between API services.
+Rocket.Chat web interface.
 
 ## Status interpretation
 

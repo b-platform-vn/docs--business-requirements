@@ -1,17 +1,17 @@
-# api-service-orchestrator
+# Legacy Applications
 
 | | |
 |---|---|
-| **Component** | `api-service-orchestrator` |
-| **Category** | API application |
-| **Technology / channel** | Node.js |
+| **Component** | `Legacy Applications` |
+| **Category** | Legacy |
+| **Technology / channel** | WinForm |
 | **Status** | **Ready to use / Published** |
-| **Ownership** | Phat 1, Phat Ngo (Part-time) |
+| **Ownership** | Hai |
 | **Architecture source** | [`component-design.excalidraw`](../diagrams/component-design.excalidraw) |
 
 ## Purpose
 
-Orchestrates requests between API services.
+Existing Windows Forms applications.
 
 ## Status interpretation
 

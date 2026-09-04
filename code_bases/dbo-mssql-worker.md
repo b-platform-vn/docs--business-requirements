@@ -1,17 +1,17 @@
-# api-service-facebook
+# dbo-mssql-worker
 
 | | |
 |---|---|
-| **Component** | `api-service-facebook` |
+| **Component** | `dbo-mssql-worker` |
 | **Category** | API application |
 | **Technology / channel** | Node.js |
 | **Status** | **In Development** |
-| **Ownership** | Phat 1, Phat Ngo (Part-time) |
+| **Ownership** | An, Phat 2 (Part-time), Khuong (Part-time) |
 | **Architecture source** | [`component-design.excalidraw`](../diagrams/component-design.excalidraw) |
 
 ## Purpose
 
-Facebook integration service.
+MSSQL database-operation worker.
 
 ## Status interpretation
 

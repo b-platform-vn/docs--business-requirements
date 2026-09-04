@@ -2,44 +2,17 @@
 
 | | |
 |---|---|
-| **Repo** | `github.com/b-platform-vn/api-service-organization` |
-| **Folds** | `api-b2b-mdfoods` (B2B parts) + `api-backoffice-quotes` + `api-sale` → [old docs](./deprecated/api-service-mdfoods.md) |
-| **v3 target** | `api-service-organization` (L2) — b2b domain |
-| **Layer** | L2 — API Services |
-| **Status** | active (repo created 2026-08-12, NestJS scaffold — fold of `api-b2b-mdfoods` B2B parts + `api-backoffice-quotes` + `api-sale`) |
-| **Language** | NestJS 11 + TypeORM + TypeScript |
-| **Default branch** | `main` |
-
-Last synced: 2026-08-12
+| **Component** | `api-service-organization` |
+| **Category** | API application |
+| **Technology / channel** | Node.js |
+| **Status** | **In Development** |
+| **Ownership** | Phat 1, Phat Ngo (Part-time) |
+| **Architecture source** | [`component-design.excalidraw`](../diagrams/component-design.excalidraw) |
 
 ## Purpose
 
-Organization (B2B) domain service. Owns the **business logic** for business-to-business operations — company management, employee/permission, sales pipeline, and quote management. Folds the B2B parts of `api-b2b-mdfoods`, plus `api-backoffice-quotes` and `api-sale`, into one domain-driven service.
+Organization and B2B business service.
 
-## Responsibility
+## Status interpretation
 
-- **Employee**: employee accounts, roles, profiles (B2B side).
-- **Company**: company info, company-member relationships.
-- **Member/permission**: company member permissions, role assignment (from `api-b2b-mdfoods` FRDs 12–13).
-- **Sales pipeline**: opportunities, stages, quote-to-order sales flow (from `api-sale`).
-- **Quote management**: operator-side quote creation, approval, lifecycle (from `api-backoffice-quotes`).
-
-## Dependencies
-
-- **Consumers (L1)**: [`bof-web-bplatform`](./bof-web-bplatform.md) (backoffice portal), [`cfc-web-mdfoods`](./cfc-web-mdfoods.md) (MDFoods B2B storefront calls quote/sales flow).
-- **Cross-domain (via orchestrator)**: [`api-service-identity`](./api-service-identity.md) (operator auth/SSO), [`api-service-ecom`](./api-service-ecom.md) (quote → order handoff). Requests are routed through the Service Orchestrator, not called directly.
-- **Database Operator (L3)**: [`dbo-head`](./dbo-head.md) — synchronous request/response for all datastore access (MSSQL). This service does **not** touch the datastore directly.
-
-## Public API surface
-
-- HTTP REST API for company, employee, member, quote, sales pipeline.
-
-## Notes
-
-- ✅ Repo exists on the remote (`github.com/b-platform-vn/api-service-organization`, created 2026-08-12). NestJS 11 scaffold pushed. Package scope: `@b-platform-vn/api-service-organization`. Consumes `@b-platform-vn/dbo-schemas@^0.1.4` from GitHub Packages. Reference implementations: `api-b2b-mdfoods` (B2B parts), `api-backoffice-quotes`, `api-sale` (planned — see Super App installed apps).
-- B2B quote flow connects to [`api-service-ecom`](./api-service-ecom.md) for order conversion (quote-to-order).
-- The Super App lists `B-Platform Sale App` as an installed app — that UI consumes this service.
-
-## Owner
-
-- Engineering (B2B team). Architecture: B-Platform architect owns this doc only.
+This status comes from the component-design overlay: yellow check.

@@ -1,17 +1,17 @@
-# api-service-agent
+# DB-MIS
 
 | | |
 |---|---|
-| **Component** | `api-service-agent` |
-| **Category** | API application |
-| **Technology / channel** | Node.js |
+| **Component** | `DB-MIS` |
+| **Category** | Legacy |
+| **Technology / channel** | MSSQL Server |
 | **Status** | **Not started** |
-| **Ownership** | Phat 1, Phat Ngo (Part-time) |
+| **Ownership** | Hai |
 | **Architecture source** | [`component-design.excalidraw`](../diagrams/component-design.excalidraw) |
 
 ## Purpose
 
-AI agent orchestration service.
+MIS database server as represented in the component design.
 
 ## Status interpretation
 
